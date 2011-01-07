@@ -14,5 +14,4 @@ public class Graph {
 	//Optioneel:
 	//RemoveVertex
 	//RemoveEdge
-	
 }
