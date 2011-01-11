@@ -85,6 +85,6 @@ public class GraphBuilder {
 			}catch(Exception e){}
 		}
 		
-		return null;
+		return null; //Failure, return null! BAM
 	} 
 }
