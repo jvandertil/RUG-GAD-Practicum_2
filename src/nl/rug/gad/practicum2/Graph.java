@@ -7,6 +7,9 @@ public class Graph {
 	public List<Edge> edgeList;
 	public List<Vertex> vertexList;
 	
+	public Vertex startPoint;
+	public Vertex endPoint;
+	
 	//insert(Vertex)
 	public void insert(Vertex v) {
 		this.vertexList.add(v);
@@ -27,6 +30,22 @@ public class Graph {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Finds a Vertex with the specified id within the vertexList.
+	 * 
+	 * Access time O(n). Where n is the number of vertexes
+	 * 
+	 * @param id
+	 * @return The vertex, or null.
+	 */
+	public Vertex findVertex(int id) {
+		for(Vertex v : vertexList)
+			if(v.id == id)
+				return v;
+		
+		return null;
 	}
 	
 	//Optioneel:
