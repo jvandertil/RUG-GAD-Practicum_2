@@ -30,12 +30,9 @@ public class GraphBuilder {
 			
 			Vertex a = new Vertex(start);
 			Vertex b = new Vertex(end);
-			
-			g.insert(a);
-			g.insert(b);
-			
-			g.startPoint = a;
-			g.endPoint = b;
+					
+			g.setStartPoint(a);
+			g.setEndPoint(b);
 			
 			for(int m = 0; m < numEdges; ++m) {
 				line = reader.readLine();

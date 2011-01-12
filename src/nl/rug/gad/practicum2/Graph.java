@@ -10,6 +10,16 @@ public class Graph {
 	public Vertex startPoint;
 	public Vertex endPoint;
 	
+	public void setStartPoint(Vertex v) {
+		this.startPoint = v;
+		insert(v);
+	}
+	
+	public void setEndPoint(Vertex v) {
+		this.endPoint = v;
+		insert(v);
+	}
+	
 	//insert(Vertex)
 	public void insert(Vertex v) {
 		this.vertexList.add(v);
