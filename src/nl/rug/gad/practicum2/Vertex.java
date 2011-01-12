@@ -10,6 +10,7 @@ public class Vertex {
 	public List<Edge> outgoingEdges;
 	
 	public Vertex(int id) {
+		this.id = id;
 		incomingEdges = new LinkedList<Edge>();
 		outgoingEdges = new LinkedList<Edge>();
 	}
