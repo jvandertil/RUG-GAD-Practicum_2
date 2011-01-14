@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import nl.rug.gad.practicum2.MaxFlowFordFulkerson.Method;
+
 public class GraphBuilder {
 
 	public static Graph buildGraph(File f) {
@@ -84,4 +86,9 @@ public class GraphBuilder {
 		
 		return null; //Failure, return null! BAM
 	} 
+	
+	public static void main(String args[]){
+		Graph g = GraphBuilder.buildGraph(new File("input1.txt"));
+		new MaxFlowFordFulkerson(g, g.startPoint, g.endPoint, Method.DFS);
+	}
 }

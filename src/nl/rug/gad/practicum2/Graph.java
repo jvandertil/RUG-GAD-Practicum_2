@@ -1,9 +1,10 @@
 package nl.rug.gad.practicum2;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Graph {
-
+	
 	public List<Edge> edgeList;
 	public List<Vertex> vertexList;
 	
@@ -11,6 +12,8 @@ public class Graph {
 	public Vertex endPoint;
 	
 	public void setStartPoint(Vertex v) {
+		edgeList = new LinkedList<Edge>();
+		vertexList = new LinkedList<Vertex>();
 		this.startPoint = v;
 		insert(v);
 	}
@@ -18,6 +21,13 @@ public class Graph {
 	public void setEndPoint(Vertex v) {
 		this.endPoint = v;
 		insert(v);
+	}
+	
+	public Vertex opposite(Vertex v, Edge e){
+		if(e.start.equals(v)){
+			return e.end;
+		}
+		return e.start;
 	}
 	
 	//insert(Vertex)
@@ -28,6 +38,8 @@ public class Graph {
 	//insert(Edge e, Vertex start, Vertex eind)
 	public void insert(Edge e, Vertex start, Vertex end) {
 		edgeList.add(e);
+		e.start = start;
+		e.end = end;
 		start.addOutgoing(e);
 		end.addIncoming(e);
 	}
