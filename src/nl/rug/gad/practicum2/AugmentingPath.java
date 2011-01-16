@@ -69,7 +69,10 @@ public class AugmentingPath {
 						e.status = EdgeStatus.DISCOVERY;
 						e.forward = true;
 						path.add(e);
-					}
+					} else {
+					e.status = EdgeStatus.BACK;
+					augmentedPath.remove(e);
+				}
 				}
 			}
 			
