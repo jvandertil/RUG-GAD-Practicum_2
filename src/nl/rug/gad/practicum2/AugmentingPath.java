@@ -89,9 +89,14 @@ public class AugmentingPath {
 						e.status = EdgeStatus.DISCOVERY;
 						e.forward = true;
 						path.add(e);
+						e.color = Color.blue;
 					} else {
 						e.status = EdgeStatus.BACK;
 						path.remove(e);
+						e.color = Color.black;
+					}
+					if(x.equals(t)){
+						return path;
 					}
 				}
 			}
@@ -103,10 +108,15 @@ public class AugmentingPath {
 						e.status = EdgeStatus.DISCOVERY;
 						e.forward = false;
 						path.add(e);
+						e.color = Color.blue;
 						vertexQueue.add(x);
 					} else {
 						e.status = EdgeStatus.BACK;
 						path.remove(e);
+						e.color = Color.black;
+					}
+					if(x.equals(t)){
+						return path;
 					}
 				}
 			}
