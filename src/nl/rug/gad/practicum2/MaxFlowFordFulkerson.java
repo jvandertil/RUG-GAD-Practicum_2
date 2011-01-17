@@ -33,6 +33,7 @@ public class MaxFlowFordFulkerson {
 		//Reset all directions in graph
 		resetEdges(g);
 		List<Edge> augmentedPath = getAugmentedPath(g, s, t, m);
+		printAugmentedPath(augmentedPath);
 		if(augmentedPath.size() > 0){
 			int resCap = getResidualCapacity(augmentedPath);
 			pushResCap(augmentedPath, resCap);
@@ -40,10 +41,16 @@ public class MaxFlowFordFulkerson {
 		graphChanged(); //Update View
 	}
 	
+	private void printAugmentedPath(List<Edge> path){
+		System.out.println("Augmented Path");
+		for(Edge e : path){
+			System.out.println(e.start.id + " to " + e.end.id);
+		}
+	}
+	
 	private void resetEdges(Graph g){
 		for(Edge e : g.edgeList){
 			e.status = EdgeStatus.UNEXPLORED;
-			e.color = Color.black;
 		}
 		for(Vertex v : g.vertexList){
 			v.status = VertexStatus.UNEXPLORED;
@@ -51,10 +58,10 @@ public class MaxFlowFordFulkerson {
 	}
 	
 	private List<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t, Method m){
-		List<Edge> augmentedPath = null;
+		List<Edge> augmentedPath = new LinkedList<Edge>();
 		switch (m) {
 		case DFS:
-			augmentedPath = AugmentingPath.getAugmentedPathDFS(g, s, t);
+			augmentedPath = AugmentingPath.getAugmentedPathDFS(g, s, t, augmentedPath);
 			break;
 		case BFS:
 			augmentedPath = AugmentingPath.getAugmentedPathBFS(g, s, t);
