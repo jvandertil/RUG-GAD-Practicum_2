@@ -34,58 +34,37 @@ public class AugmentingPath {
 
 	public static List<Edge> getAugmentedPathBFS(Graph g, Vertex s, Vertex t) {
 		List<Edge> path = new LinkedList<Edge>();
-		
 		Queue<Vertex> vertexQueue = new LinkedList<Vertex>();
-
+		
 		s.status = VertexStatus.EXPLORED;
 		vertexQueue.add(s);
 
 		Vertex w;
+		List<Edge> unionEdge;
 
 		while (!vertexQueue.isEmpty()) {
 			w = vertexQueue.poll();
 			
-			for (Edge e : w.outgoingEdges) {
-				if (e.flow < e.capacity) {
-					Vertex x = g.opposite(w, e);
+			unionEdge = new LinkedList<Edge>();
+			
+			unionEdge.addAll(w.incomingEdges);
+			unionEdge.addAll(w.outgoingEdges);
+			
+			for(Edge e : unionEdge) {
+				Vertex next = e.end;
+				if(next.status == VertexStatus.UNEXPLORED && e.hasResidualCapacity()) {
+					vertexQueue.add(next);
+					next.status = VertexStatus.EXPLORED;
+					path.add(e);
 					
-					if (x.status == VertexStatus.UNEXPLORED) {
-						vertexQueue.add(x);
-						e.status = EdgeStatus.DISCOVERY;
-						e.forward = true;
-						path.add(e);
-					} else {
-						e.status = EdgeStatus.BACK;
-						path.remove(e);
-					}
-					
-					if(x.equals(t)){
+					if(next == t)
 						return path;
-					}
 				}
 			}
 			
-			for(Edge e : s.incomingEdges) {
-				if(e.flow > 0) { //TODO:Verify.
-					Vertex x = g.opposite(w, e);
-					
-					if(x.status == VertexStatus.UNEXPLORED) {
-						e.status = EdgeStatus.DISCOVERY;
-						e.forward = false;
-						path.add(e);
-						vertexQueue.add(x);
-					} else {
-						e.status = EdgeStatus.BACK;
-						path.remove(e);
-					}
-					
-					if(x.equals(t)){
-						return path;
-					}
-				}
-			}
+			unionEdge = null;
 		}
-
+		
 		return path;
 	}
 }

@@ -55,6 +55,15 @@ public class Graph {
 		return false;
 	}
 	
+	public Edge getConnectingEdge(Vertex a, Vertex b) {
+		for(Edge e : a.outgoingEdges) {
+			if(e.end == b)
+				return e;
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * Finds a Vertex with the specified id within the vertexList.
 	 * 
