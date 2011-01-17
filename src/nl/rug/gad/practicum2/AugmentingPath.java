@@ -13,15 +13,10 @@ public class AugmentingPath {
 	/*
 	 * g = graph s = source t = sink
 	 */
-<<<<<<< HEAD
 	private static boolean stop = false;
 	
 	public static LinkedList<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t){
 		stop = false;
-=======
-
-	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t) {
->>>>>>> origin/master
 		LinkedList<Edge> augmentedPath = new LinkedList<Edge>();
 		s.status = VertexStatus.EXPLORED;
 
@@ -32,14 +27,11 @@ public class AugmentingPath {
 					e.status = EdgeStatus.DISCOVERY;
 					e.forward = true;
 					augmentedPath.add(e);
-<<<<<<< HEAD
 					e.color = Color.blue;
 					if(w.equals(t)){
 						stop = true;
 						return augmentedPath;
 					}
-=======
->>>>>>> origin/master
 					augmentedPath.addAll(getAugmentedPathDFS(g, w, t));
 				} else {
 					e.status = EdgeStatus.BACK;
@@ -53,20 +45,17 @@ public class AugmentingPath {
 		}
 
 		for (Edge e : s.incomingEdges) {
-			if (e.flow > 0) { // TODO: Non zero flow toch?
+			if (e.flow > 0) { // TODO: Non zero flow toch? -Als ie 0 is, kan dr niks af
 				Vertex w = g.opposite(s, e);
 				if (w.status == VertexStatus.UNEXPLORED) {
 					e.status = EdgeStatus.DISCOVERY;
 					e.forward = false;
 					augmentedPath.add(e);
-<<<<<<< HEAD
 					e.color = Color.blue;
 					if(w.equals(t)){
 						stop = true;
 						return augmentedPath;
 					}
-=======
->>>>>>> origin/master
 					augmentedPath.addAll(getAugmentedPathDFS(g, w, t));
 				} else {
 					e.status = EdgeStatus.BACK;
@@ -78,12 +67,7 @@ public class AugmentingPath {
 				return augmentedPath;
 			}
 		}
-<<<<<<< HEAD
 		return new LinkedList<Edge>();
-=======
-
-		return augmentedPath;
->>>>>>> origin/master
 	}
 
 	public static List<Edge> getAugmentedPathBFS(Graph g, Vertex s, Vertex t) {
@@ -106,9 +90,9 @@ public class AugmentingPath {
 						e.forward = true;
 						path.add(e);
 					} else {
-					e.status = EdgeStatus.BACK;
-					augmentedPath.remove(e);
-				}
+						e.status = EdgeStatus.BACK;
+						path.remove(e);
+					}
 				}
 			}
 			
