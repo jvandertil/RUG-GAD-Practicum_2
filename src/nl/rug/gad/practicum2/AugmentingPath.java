@@ -1,5 +1,6 @@
 package nl.rug.gad.practicum2;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -9,59 +10,26 @@ import nl.rug.gad.practicum2.Vertex.VertexStatus;
 
 public class AugmentingPath {
 
-	/*
-	 * g = graph s = source t = sink
-	 */
-	private static boolean stop = false;
-	
 	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t, List<Edge> path){
-		stop = false;
-		s.status = VertexStatus.EXPLORED;
+		if(s == t)
+			return path;
+		
+		List<Edge> unionEdge = new LinkedList<Edge>();
+		
+		unionEdge.addAll(s.incomingEdges);
+		unionEdge.addAll(s.outgoingEdges);
 
-		for (Edge e : s.outgoingEdges) {
-			if (e.flow < e.capacity) {
-				Vertex w = g.opposite(s, e);
-				if (w.status == VertexStatus.UNEXPLORED) {
-					e.status = EdgeStatus.DISCOVERY;
-					e.forward = true;
-					path.add(e);
-					if(w.equals(t)){
-						stop = true;
-						return path;
-					}
-					path = getAugmentedPathDFS(g, w, t, path);
-				} else {
-					e.status = EdgeStatus.BACK;
-					path.remove(e);
-				}
-			}
-			if(stop){
-				return path;
+		for(Edge e : unionEdge) {
+			if(e.hasResidualCapacity() && !path.contains(e)) {
+				path.add(e);
+				List<Edge> result = getAugmentedPathDFS(g, e.end, t, path);
+				
+				if(result.size() > 0)
+					return result;
 			}
 		}
-
-		for (Edge e : s.incomingEdges) {
-			if (e.flow > 0) { // TODO: Non zero flow toch? -Als ie 0 is, kan dr niks af
-				Vertex w = g.opposite(s, e);
-				if (w.status == VertexStatus.UNEXPLORED) {
-					e.status = EdgeStatus.DISCOVERY;
-					e.forward = false;
-					path.add(e);
-					if(w.equals(t)){
-						stop = true;
-						return path;
-					}
-					path = getAugmentedPathDFS(g, w, t, path);
-				} else {
-					e.status = EdgeStatus.BACK;
-					path.remove(e);
-				}
-			}
-			if(stop){
-				return path;
-			}
-		}
-		return new LinkedList<Edge>();
+		
+		return Collections.emptyList();
 	}
 
 	public static List<Edge> getAugmentedPathBFS(Graph g, Vertex s, Vertex t) {
