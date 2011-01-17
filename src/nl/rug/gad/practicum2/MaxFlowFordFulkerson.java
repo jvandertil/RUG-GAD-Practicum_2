@@ -3,6 +3,7 @@ package nl.rug.gad.practicum2;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
+import java.util.List;
 
 import nl.rug.gad.practicum2.Edge.EdgeStatus;
 import nl.rug.gad.practicum2.Vertex.VertexStatus;
@@ -31,7 +32,7 @@ public class MaxFlowFordFulkerson {
 	public void nextFlow(){
 		//Reset all directions in graph
 		resetEdges(g);
-		LinkedList<Edge> augmentedPath = getAugmentedPath(g, s, t, m);
+		List<Edge> augmentedPath = getAugmentedPath(g, s, t, m);
 		if(augmentedPath.size() > 0){
 			int resCap = getResidualCapacity(augmentedPath);
 			pushResCap(augmentedPath, resCap);
@@ -49,8 +50,8 @@ public class MaxFlowFordFulkerson {
 		}
 	}
 	
-	private LinkedList<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t, Method m){
-		LinkedList<Edge> augmentedPath = null;
+	private List<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t, Method m){
+		List<Edge> augmentedPath = null;
 		switch (m) {
 		case DFS:
 			augmentedPath = AugmentingPath.getAugmentedPathDFS(g, s, t);
@@ -66,7 +67,7 @@ public class MaxFlowFordFulkerson {
 	}
 	
 	//Computes the residual capacity of the augmenting path
-	private int getResidualCapacity(LinkedList<Edge> augmentingPath){
+	private int getResidualCapacity(List<Edge> augmentingPath){
 		int maxFlow = Integer.MAX_VALUE;
 		for(Edge e : augmentingPath){
 			int resCap;
@@ -83,7 +84,7 @@ public class MaxFlowFordFulkerson {
 	}
 	
 	//Pushes the residual capacity along the augmenting path
-	private void pushResCap(LinkedList<Edge> augmentedPath, int resCap){
+	private void pushResCap(List<Edge> augmentedPath, int resCap){
 		for(Edge e : augmentedPath){
 			if(e.forward){
 				e.flow = e.flow + resCap;
