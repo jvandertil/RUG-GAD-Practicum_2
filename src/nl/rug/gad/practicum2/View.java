@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import nl.rug.gad.practicum2.Edge.EdgeStatus;
+
 public class View extends JFrame {
 
 	private static final long serialVersionUID = -5640918753333009588L;
@@ -48,7 +50,7 @@ public class View extends JFrame {
 		drawn.add(v);
 		
 		if(!xymap.containsKey(p.x)){
-			xymap.put(p.x, 0);
+			xymap.put(p.x, p.y);
 		}
 		int y = xymap.get(p.x);
 		
@@ -56,7 +58,7 @@ public class View extends JFrame {
 			if(vertexPoints.containsKey(e.end)){
 				drawEdge(e, p, vertexPoints.get(e.end), g);
 			} else {
-				Point p2 = new Point(p.x + 30, p.y + y);
+				Point p2 = new Point(p.x + 30, y);
 				drawVertex(e.end, p2, g);
 				vertexPoints.put(e.end, p2);
 				drawEdge(e, p, p2, g);
@@ -67,7 +69,7 @@ public class View extends JFrame {
 			if(vertexPoints.containsKey(e.start)){
 				drawEdge(e, p, vertexPoints.get(e.start), g);
 			} else {
-				Point p2 = new Point(p.x + 30, p.y + y);
+				Point p2 = new Point(p.x + 30, y);
 				drawVertex(e.start, p2, g);
 				vertexPoints.put(e.start, p2);
 				drawEdge(e, p, p2, g);
@@ -112,7 +114,19 @@ public class View extends JFrame {
 	}
 	
 	private void drawEdge(Edge e, Point p1, Point p2, Graphics2D g){
-		g.setColor(e.color);
+		switch (e.status){
+		case BACK:
+			g.setColor(Color.RED);
+			break;
+		case UNEXPLORED:
+			g.setColor(Color.BLACK);
+			break;
+		case DISCOVERY:
+			g.setColor(Color.BLUE);
+			break;
+		default:
+			g.setColor(Color.BLACK);
+		}
 		g.drawLine(p1.x * scale, p1.y * scale, p2.x * scale, p2.y * scale);
 		
 		g.drawString(e.flow + "/" + e.capacity, ((p1.x + p2.x) / 2) * scale, ((p1.y + p2.y) / 2) * scale);

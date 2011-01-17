@@ -1,6 +1,5 @@
 package nl.rug.gad.practicum2;
 
-import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -15,9 +14,8 @@ public class AugmentingPath {
 	 */
 	private static boolean stop = false;
 	
-	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t){
+	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t, List<Edge> path){
 		stop = false;
-		List<Edge> augmentedPath = new LinkedList<Edge>();
 		s.status = VertexStatus.EXPLORED;
 
 		for (Edge e : s.outgoingEdges) {
@@ -26,21 +24,19 @@ public class AugmentingPath {
 				if (w.status == VertexStatus.UNEXPLORED) {
 					e.status = EdgeStatus.DISCOVERY;
 					e.forward = true;
-					augmentedPath.add(e);
-					e.color = Color.blue;
+					path.add(e);
 					if(w.equals(t)){
 						stop = true;
-						return augmentedPath;
+						return path;
 					}
-					augmentedPath.addAll(getAugmentedPathDFS(g, w, t));
+					path = getAugmentedPathDFS(g, w, t, path);
 				} else {
 					e.status = EdgeStatus.BACK;
-					augmentedPath.remove(e);
-					e.color = Color.black;
+					path.remove(e);
 				}
 			}
 			if(stop){
-				return augmentedPath;
+				return path;
 			}
 		}
 
@@ -50,21 +46,19 @@ public class AugmentingPath {
 				if (w.status == VertexStatus.UNEXPLORED) {
 					e.status = EdgeStatus.DISCOVERY;
 					e.forward = false;
-					augmentedPath.add(e);
-					e.color = Color.blue;
+					path.add(e);
 					if(w.equals(t)){
 						stop = true;
-						return augmentedPath;
+						return path;
 					}
-					augmentedPath.addAll(getAugmentedPathDFS(g, w, t));
+					path = getAugmentedPathDFS(g, w, t, path);
 				} else {
 					e.status = EdgeStatus.BACK;
-					augmentedPath.remove(e);
-					e.color = Color.black;
+					path.remove(e);
 				}
 			}
 			if(stop){
-				return augmentedPath;
+				return path;
 			}
 		}
 		return new LinkedList<Edge>();
@@ -92,11 +86,9 @@ public class AugmentingPath {
 						e.status = EdgeStatus.DISCOVERY;
 						e.forward = true;
 						path.add(e);
-						e.color = Color.blue;
 					} else {
 						e.status = EdgeStatus.BACK;
 						path.remove(e);
-						e.color = Color.black;
 					}
 					
 					if(x.equals(t)){
@@ -113,12 +105,10 @@ public class AugmentingPath {
 						e.status = EdgeStatus.DISCOVERY;
 						e.forward = false;
 						path.add(e);
-						e.color = Color.blue;
 						vertexQueue.add(x);
 					} else {
 						e.status = EdgeStatus.BACK;
 						path.remove(e);
-						e.color = Color.black;
 					}
 					
 					if(x.equals(t)){

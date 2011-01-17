@@ -71,6 +71,18 @@ public class Graph {
 		return null;
 	}
 	
+	public void printGraph(){
+		for(Vertex v : this.vertexList){
+			System.out.println("Vertex " + v.id);
+			for(Edge e : v.outgoingEdges){
+				System.out.println("ForwardEdge to " + e.end.id + " Flow: " + e.flow + "/" + e.capacity);
+			}
+			for(Edge e : v.incomingEdges){
+				System.out.println("BackwardEdge to " + e.start.id + " Flow: " + e.flow + "/" + e.capacity);
+			}
+		}
+	}
+	
 	//Optioneel:
 	//RemoveVertex
 	//RemoveEdge
