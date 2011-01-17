@@ -15,9 +15,9 @@ public class AugmentingPath {
 	 */
 	private static boolean stop = false;
 	
-	public static LinkedList<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t){
+	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t){
 		stop = false;
-		LinkedList<Edge> augmentedPath = new LinkedList<Edge>();
+		List<Edge> augmentedPath = new LinkedList<Edge>();
 		s.status = VertexStatus.EXPLORED;
 
 		for (Edge e : s.outgoingEdges) {
@@ -72,6 +72,7 @@ public class AugmentingPath {
 
 	public static List<Edge> getAugmentedPathBFS(Graph g, Vertex s, Vertex t) {
 		List<Edge> path = new LinkedList<Edge>();
+		
 		Queue<Vertex> vertexQueue = new LinkedList<Vertex>();
 
 		s.status = VertexStatus.EXPLORED;
@@ -81,9 +82,11 @@ public class AugmentingPath {
 
 		while (!vertexQueue.isEmpty()) {
 			w = vertexQueue.poll();
+			
 			for (Edge e : w.outgoingEdges) {
 				if (e.flow < e.capacity) {
 					Vertex x = g.opposite(w, e);
+					
 					if (x.status == VertexStatus.UNEXPLORED) {
 						vertexQueue.add(x);
 						e.status = EdgeStatus.DISCOVERY;
@@ -95,6 +98,7 @@ public class AugmentingPath {
 						path.remove(e);
 						e.color = Color.black;
 					}
+					
 					if(x.equals(t)){
 						return path;
 					}
@@ -104,6 +108,7 @@ public class AugmentingPath {
 			for(Edge e : s.incomingEdges) {
 				if(e.flow > 0) { //TODO:Verify.
 					Vertex x = g.opposite(w, e);
+					
 					if(x.status == VertexStatus.UNEXPLORED) {
 						e.status = EdgeStatus.DISCOVERY;
 						e.forward = false;
@@ -115,6 +120,7 @@ public class AugmentingPath {
 						path.remove(e);
 						e.color = Color.black;
 					}
+					
 					if(x.equals(t)){
 						return path;
 					}

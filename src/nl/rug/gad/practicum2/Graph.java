@@ -27,6 +27,7 @@ public class Graph {
 		if(e.start.equals(v)){
 			return e.end;
 		}
+		
 		return e.start;
 	}
 	
