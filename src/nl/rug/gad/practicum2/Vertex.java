@@ -26,4 +26,11 @@ public class Vertex {
 	public void addOutgoing(Edge e) {
 		outgoingEdges.add(e);
 	}
+	
+	public List<Edge> getAllEdges(){
+		List<Edge> unionEdge = new LinkedList<Edge>();
+		unionEdge.addAll(this.incomingEdges);
+		unionEdge.addAll(this.outgoingEdges);
+		return unionEdge;
+	}
 }

@@ -10,8 +10,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import nl.rug.gad.practicum2.Edge.EdgeStatus;
-
 public class View extends JFrame {
 
 	private static final long serialVersionUID = -5640918753333009588L;

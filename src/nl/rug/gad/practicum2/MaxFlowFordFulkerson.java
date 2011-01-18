@@ -1,6 +1,5 @@
 package nl.rug.gad.practicum2;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,6 +50,7 @@ public class MaxFlowFordFulkerson {
 	private void resetEdges(Graph g){
 		for(Edge e : g.edgeList){
 			e.status = EdgeStatus.UNEXPLORED;
+			
 		}
 		for(Vertex v : g.vertexList){
 			v.status = VertexStatus.UNEXPLORED;
