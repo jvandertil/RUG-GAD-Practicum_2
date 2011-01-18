@@ -19,8 +19,4 @@ public class Edge {
 	public Edge(int capacity) {
 		this.capacity = capacity;
 	}
-	
-	public boolean hasResidualCapacity() {
-		return (flow < capacity);
-	}
 }

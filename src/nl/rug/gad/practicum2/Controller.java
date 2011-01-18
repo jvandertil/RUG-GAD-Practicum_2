@@ -16,7 +16,7 @@ public class Controller {
 	
 	public Controller(){
 		graph = GraphBuilder.buildGraph(new File("input1.txt"));
-		mfff = new MaxFlowFordFulkerson(graph, graph.startPoint, graph.endPoint, Method.DIJKSTRA);
+		mfff = new MaxFlowFordFulkerson(graph, graph.startPoint, graph.endPoint, Method.BFS);
 		mfff.setGraphListener(graphListener());
 		view = new View(graph);
 		view.addMouseListener(mouseListener());
