@@ -13,41 +13,18 @@ import nl.rug.gad.practicum2.Vertex.VertexStatus;
 
 public class AugmentingPath {
 
-	private static boolean stop = false;
-
 	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t){
-		List<Edge> augmentedPath = new LinkedList<Edge>();
 		HashMap<Vertex, Edge> parents = getPathDFS(g, s, t, new HashMap<Vertex, Edge>());
-		
-		Vertex iterator = t;
-		Edge parent = parents.get(iterator);
-		boolean sourceReached = false;
-		while(parent != null){
-			augmentedPath.add(parent);
-			iterator = g.opposite(iterator, parent);
-			parent = parents.get(iterator);
-			if(iterator.equals(s)){
-				sourceReached = true;
-			}
-		}
-		
-		if(sourceReached){
-			return augmentedPath;
-		}
-		
-		return Collections.emptyList();
+		return getAugmentedPath(parents, g, s, t);
 	}
 	
 	public static HashMap<Vertex, Edge> getPathDFS(Graph g, Vertex s, Vertex t, HashMap<Vertex, Edge> parents) {
-		stop = false;
-		List<Edge> unionEdge = s.getAllEdges();
-
 		s.status = VertexStatus.EXPLORED;
-		for (Edge e : unionEdge) {
+		for (Edge e : s.getAllEdges()) {
 			if (e.status == EdgeStatus.UNEXPLORED
 					&& getResidualCapacity(s, e) > 0) {
 				Vertex w = g.opposite(s, e);
-				if (w.status == VertexStatus.UNEXPLORED && canContinue(w, e, t)) {
+				if (canContinue(w, e, t)) {
 					e.status = EdgeStatus.DISCOVERY;
 					parents.put(w, e);
 					if (e.start.equals(s)) {
@@ -66,10 +43,9 @@ public class AugmentingPath {
 	
 	private static boolean canContinue(Vertex v, Edge source, Vertex destination) {
 		for (Edge e : v.getAllEdges()) {
-			if (v.equals(destination)) {
-				return true;
-			}
-			if (getResidualCapacity(v, e) > 0 && !e.equals(source)) {
+			if (((getResidualCapacity(v, e) > 0 && !e.equals(source)) || 
+						v.equals(destination)) && 
+				v.status == VertexStatus.UNEXPLORED) {
 				return true;
 			}
 		}
@@ -167,13 +143,15 @@ public class AugmentingPath {
 				}
 			}
 		}
-		
+		return getAugmentedPath(parents, g, s, t);
+	}
+	
+	private static List<Edge> getAugmentedPath(HashMap<Vertex, Edge> parents, Graph g, Vertex s, Vertex t){
 		List<Edge> augmentedPath = new LinkedList<Edge>();
 		Vertex iterator = t;
 		Edge parent = parents.get(iterator);
 		boolean sourceReached = false;
 		while(parent != null){
-			//System.out.println(iterator.id + " to " + g.opposite(iterator, parent).id);
 			augmentedPath.add(parent);
 			iterator = g.opposite(iterator, parent);
 			parent = parents.get(iterator);
@@ -181,7 +159,6 @@ public class AugmentingPath {
 				sourceReached = true;
 			}
 		}
-		
 		if(sourceReached){
 			return augmentedPath;
 		}
