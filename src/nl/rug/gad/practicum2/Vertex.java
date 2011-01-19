@@ -3,11 +3,14 @@ package nl.rug.gad.practicum2;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Vertex {
+public class Vertex implements Comparable<Vertex> {
 	
 	public int id;
 	public List<Edge> incomingEdges;
 	public List<Edge> outgoingEdges;
+	
+	//Only used for Dijkstra's algorithm
+	public Integer maxFlow = 0;
 	
 	//Only to be used when searching for augmented path
 	public enum VertexStatus {UNEXPLORED, EXPLORED};
@@ -32,5 +35,10 @@ public class Vertex {
 		unionEdge.addAll(this.incomingEdges);
 		unionEdge.addAll(this.outgoingEdges);
 		return unionEdge;
+	}
+
+	@Override
+	public int compareTo(Vertex v) {
+		return -this.maxFlow.compareTo(v.maxFlow);
 	}
 }

@@ -9,7 +9,7 @@ import nl.rug.gad.practicum2.Vertex.VertexStatus;
 
 public class MaxFlowFordFulkerson {
 	
-	public enum Method {DFS, BFS}
+	public enum Method {DFS, BFS, DIJKSTRA}
 	
 	private Graph g;
 	private Vertex s, t;
@@ -65,6 +65,9 @@ public class MaxFlowFordFulkerson {
 			break;
 		case BFS:
 			augmentedPath = AugmentingPath.getAugmentedPathBFS(g, s, t);
+			break;
+		case DIJKSTRA:
+			augmentedPath = AugmentingPath.getAugmentedPathDijkstra(g, s, t);
 			break;
 		default:
 			augmentedPath = new LinkedList<Edge>();
