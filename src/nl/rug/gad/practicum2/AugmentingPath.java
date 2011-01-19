@@ -15,7 +15,31 @@ public class AugmentingPath {
 
 	private static boolean stop = false;
 
-	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t, List<Edge> path) {
+	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t){
+		List<Edge> augmentedPath = new LinkedList<Edge>();
+		HashMap<Vertex, Edge> parents = getPathDFS(g, s, t, new HashMap<Vertex, Edge>());
+		
+		Vertex iterator = t;
+		Edge parent = parents.get(iterator);
+		boolean sourceReached = false;
+		while(parent != null){
+			//System.out.println(iterator.id + " to " + g.opposite(iterator, parent).id);
+			augmentedPath.add(parent);
+			iterator = g.opposite(iterator, parent);
+			parent = parents.get(iterator);
+			if(iterator.equals(s)){
+				sourceReached = true;
+			}
+		}
+		
+		if(sourceReached){
+			return augmentedPath;
+		}
+		
+		return Collections.emptyList();
+	}
+	
+	public static HashMap<Vertex, Edge> getPathDFS(Graph g, Vertex s, Vertex t, HashMap<Vertex, Edge> parents) {
 		stop = false;
 		List<Edge> unionEdge = s.getAllEdges();
 
@@ -26,27 +50,40 @@ public class AugmentingPath {
 				Vertex w = g.opposite(s, e);
 				if (w.status == VertexStatus.UNEXPLORED && canContinue(w, e, t)) {
 					e.status = EdgeStatus.DISCOVERY;
-					path.add(e);
+					//path.add(e);
+					parents.put(w, e);
 					if (e.start.equals(s)) {
 						e.forward = true;
 					} else {
 						e.forward = false;
 					}
-					if (w.equals(t)) {
-						stop = true;
-						return path;
-					}
-					getAugmentedPathDFS(g, w, t, path);
+					//if (w.equals(t)) {
+					//	stop = true;
+					//	return path;
+					//}
+					getPathDFS(g, w, t, parents);
 				} else {
 					e.status = EdgeStatus.BACK;
-					path.remove(e);
+					//path.remove(e);
 				}
 			}
 			if (stop) {
-				return path;
+				return parents;
 			}
 		}
-		return path;
+		return parents;
+	}
+	
+	private static boolean canContinue(Vertex v, Edge source, Vertex destination) {
+		for (Edge e : v.getAllEdges()) {
+			if (v.equals(destination)) {
+				return true;
+			}
+			if (getResidualCapacity(v, e) > 0 && !e.equals(source)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static List<Edge> getAugmentedPathBFS(Graph g, Vertex s, Vertex t) {
@@ -70,13 +107,6 @@ public class AugmentingPath {
 			for (Edge e : unionEdge) {
 				if (e.status == EdgeStatus.UNEXPLORED
 						&& (getResidualCapacity(w, e) > 0)) {
-					//Vertex next;
-					//if (e.start.equals(w)) {
-					//	next = e.end;
-					//} else {
-					//	next = e.start;
-					//}
-					//Vertex next = e.end;
 					Vertex next = g.opposite(w, e);
 					if (next.status == VertexStatus.UNEXPLORED) {
 						vertexQueue.add(next);
@@ -109,12 +139,6 @@ public class AugmentingPath {
 						}
 					} else {
 						e.status = EdgeStatus.BACK;
-//						if (e.start.equals(w)) {
-//							e.forward = false;
-//						} else {
-//							e.forward = true;
-//						}
-						
 					}
 				}
 			}
@@ -147,8 +171,7 @@ public class AugmentingPath {
 				if(r > z.maxFlow && !e.equals(parents.get(z))){
 					z.maxFlow = r;
 					parents.put(z, e);
-					if(Q.contains(z)){
-						Q.remove(z);
+					if(Q.remove(z)){
 						Q.add(z);
 					}
 				}
@@ -162,7 +185,6 @@ public class AugmentingPath {
 		while(parent != null){
 			//System.out.println(iterator.id + " to " + g.opposite(iterator, parent).id);
 			augmentedPath.add(parent);
-			parent.status = EdgeStatus.DISCOVERY;
 			iterator = g.opposite(iterator, parent);
 			parent = parents.get(iterator);
 			if(iterator.equals(s)){
@@ -174,18 +196,6 @@ public class AugmentingPath {
 			return augmentedPath;
 		}
 		return Collections.emptyList();
-	}
-
-	private static boolean canContinue(Vertex v, Edge source, Vertex destination) {
-		for (Edge e : v.getAllEdges()) {
-			if (v.equals(destination)) {
-				return true;
-			}
-			if (getResidualCapacity(v, e) > 0 && !e.equals(source)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private static int getResidualCapacity(Vertex v, Edge e) {

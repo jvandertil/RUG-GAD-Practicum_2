@@ -1,6 +1,6 @@
 package nl.rug.gad.practicum2;
 
-
+import java.awt.Color;
 
 public class Edge {
 
@@ -8,6 +8,7 @@ public class Edge {
 	public int flow;
 	public Vertex start;
 	public Vertex end;
+	public Color color = Color.black;
 	
 	//To be used when on the search for an augmenting path
 	//Not to be used when creating a graph
