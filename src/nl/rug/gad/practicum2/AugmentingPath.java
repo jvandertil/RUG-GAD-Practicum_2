@@ -15,8 +15,7 @@ public class AugmentingPath {
 
 	private static boolean stop = false;
 
-	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t,
-			List<Edge> path) {
+	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t, List<Edge> path) {
 		stop = false;
 		List<Edge> unionEdge = s.getAllEdges();
 
@@ -54,7 +53,7 @@ public class AugmentingPath {
 		List<Edge> path = new LinkedList<Edge>();
 		Queue<Vertex> vertexQueue = new LinkedList<Vertex>();
 		
-		//Map <x,y>. Vertex y discovered via x
+		//Map <x,y>. Vertex y discovered by following x
 		Map<Vertex, Edge> discoveryMap = new HashMap<Vertex, Edge>(); 
 
 		s.status = VertexStatus.EXPLORED;
@@ -71,19 +70,26 @@ public class AugmentingPath {
 			for (Edge e : unionEdge) {
 				if (e.status == EdgeStatus.UNEXPLORED
 						&& (getResidualCapacity(w, e) > 0)) {
-					Vertex next;
-					if (e.start.equals(w)) {
-						next = e.end;
-					} else {
-						next = e.start;
-					}
+					//Vertex next;
+					//if (e.start.equals(w)) {
+					//	next = e.end;
+					//} else {
+					//	next = e.start;
+					//}
 					//Vertex next = e.end;
+					Vertex next = g.opposite(w, e);
 					if (next.status == VertexStatus.UNEXPLORED) {
 						vertexQueue.add(next);
 						discoveryMap.put(next, e);
 						next.status = VertexStatus.EXPLORED;
 						e.status = EdgeStatus.DISCOVERY;
-
+						
+						if (e.start.equals(w)) {
+							e.forward = true;
+						} else {
+							e.forward = false;
+						}
+						
 						if (next == t) {
 							//sink found. Trace back.
 							boolean traceDone = false;
@@ -93,12 +99,7 @@ public class AugmentingPath {
 								currentEdge = discoveryMap.get(previousVertex);
 								path.add(currentEdge);
 								
-								if (e.start.equals(w)) {
-									previousVertex = currentEdge.start;
-								} else {
-									previousVertex = currentEdge.end;
-								}
-								
+								previousVertex = g.opposite(previousVertex, currentEdge);
 								
 								if(previousVertex == s)
 									traceDone = true;
@@ -108,11 +109,11 @@ public class AugmentingPath {
 						}
 					} else {
 						e.status = EdgeStatus.BACK;
-						if (e.start.equals(w)) {
-							e.forward = false;
-						} else {
-							e.forward = true;
-						}
+//						if (e.start.equals(w)) {
+//							e.forward = false;
+//						} else {
+//							e.forward = true;
+//						}
 						
 					}
 				}
