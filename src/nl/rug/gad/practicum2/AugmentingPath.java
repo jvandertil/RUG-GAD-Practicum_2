@@ -13,8 +13,7 @@ public class AugmentingPath {
 
 	private static boolean stop = false;
 
-	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t,
-			List<Edge> path) {
+	public static List<Edge> getAugmentedPathDFS(Graph g, Vertex s, Vertex t, List<Edge> path) {
 		stop = false;
 		List<Edge> unionEdge = s.getAllEdges();
 
@@ -52,7 +51,7 @@ public class AugmentingPath {
 		List<Edge> path = new LinkedList<Edge>();
 		Queue<Vertex> vertexQueue = new LinkedList<Vertex>();
 		
-		//Map <x,y>. Vertex y discovered via x
+		//Map <x,y>. Vertex y discovered by following x
 		Map<Vertex, Edge> discoveryMap = new HashMap<Vertex, Edge>(); 
 
 		s.status = VertexStatus.EXPLORED;
@@ -69,7 +68,9 @@ public class AugmentingPath {
 			for (Edge e : unionEdge) {
 				if (e.status == EdgeStatus.UNEXPLORED
 						&& (getResidualCapacity(w, e) > 0)) {
-					Vertex next = e.end;
+					
+					Vertex next = g.opposite(w, e);
+					
 					if (next.status == VertexStatus.UNEXPLORED) {
 						vertexQueue.add(next);
 						discoveryMap.put(next, e);
