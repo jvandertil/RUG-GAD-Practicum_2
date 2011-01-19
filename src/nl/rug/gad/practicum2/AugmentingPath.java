@@ -71,7 +71,13 @@ public class AugmentingPath {
 			for (Edge e : unionEdge) {
 				if (e.status == EdgeStatus.UNEXPLORED
 						&& (getResidualCapacity(w, e) > 0)) {
-					Vertex next = e.end;
+					Vertex next;
+					if (e.start.equals(w)) {
+						next = e.end;
+					} else {
+						next = e.start;
+					}
+					//Vertex next = e.end;
 					if (next.status == VertexStatus.UNEXPLORED) {
 						vertexQueue.add(next);
 						discoveryMap.put(next, e);
@@ -87,7 +93,12 @@ public class AugmentingPath {
 								currentEdge = discoveryMap.get(previousVertex);
 								path.add(currentEdge);
 								
-								previousVertex = currentEdge.start;
+								if (e.start.equals(w)) {
+									previousVertex = currentEdge.start;
+								} else {
+									previousVertex = currentEdge.end;
+								}
+								
 								
 								if(previousVertex == s)
 									traceDone = true;
@@ -97,7 +108,12 @@ public class AugmentingPath {
 						}
 					} else {
 						e.status = EdgeStatus.BACK;
-						e.forward = false;
+						if (e.start.equals(w)) {
+							e.forward = false;
+						} else {
+							e.forward = true;
+						}
+						
 					}
 				}
 			}
