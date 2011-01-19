@@ -23,7 +23,6 @@ public class AugmentingPath {
 		Edge parent = parents.get(iterator);
 		boolean sourceReached = false;
 		while(parent != null){
-			//System.out.println(iterator.id + " to " + g.opposite(iterator, parent).id);
 			augmentedPath.add(parent);
 			iterator = g.opposite(iterator, parent);
 			parent = parents.get(iterator);
@@ -50,25 +49,16 @@ public class AugmentingPath {
 				Vertex w = g.opposite(s, e);
 				if (w.status == VertexStatus.UNEXPLORED && canContinue(w, e, t)) {
 					e.status = EdgeStatus.DISCOVERY;
-					//path.add(e);
 					parents.put(w, e);
 					if (e.start.equals(s)) {
 						e.forward = true;
 					} else {
 						e.forward = false;
 					}
-					//if (w.equals(t)) {
-					//	stop = true;
-					//	return path;
-					//}
 					getPathDFS(g, w, t, parents);
 				} else {
 					e.status = EdgeStatus.BACK;
-					//path.remove(e);
 				}
-			}
-			if (stop) {
-				return parents;
 			}
 		}
 		return parents;
