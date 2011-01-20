@@ -137,6 +137,11 @@ public class AugmentingPath {
 				if(r > z.maxFlow && !e.equals(parents.get(z))){
 					z.maxFlow = r;
 					parents.put(z, e);
+                                        if (e.start.equals(u)) {
+						e.forward = true;
+					} else {
+						e.forward = false;
+					}
 					if(Q.remove(z)){
 						Q.add(z);
 					}
