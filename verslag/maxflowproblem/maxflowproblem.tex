@@ -48,7 +48,13 @@ In het geval van een breadth-first search is het algoritme ook bekend als het Ed
 
 \subsection{Pseudocode}
 
+De pseudocode van het algoritme is te vinden in algoritme \ref{alg:FordFulkerson}.
+
+\begin{algorithm}[h]
+\caption{Ford-Fulkerson Algorithm}
+\label{alg:FordFulkerson}
 \begin{algorithmic}
+\REQUIRE Input: Flow network $N$ containing graph $G$
 \FORALL{edge $e \in N$}
  \STATE flow($e$) $\gets 0$
 \ENDFOR
@@ -56,12 +62,32 @@ In het geval van een breadth-first search is het algoritme ook bekend als het Ed
 \STATE $stop \gets$ \FALSE
 
 \REPEAT
-\STATE traverse G starting at $s$ to find an augmenting path to $t$ ($\pi$)
+\STATE traverse $G$ starting at $s$ to find an augmenting path to $t$ ($\pi$)
 
-\IF{an augmenting path $pi$ exists}
+\IF{an augmenting path $\pi$ exists}
+
+\STATE $\Delta \gets +\infty$
+
+\FORALL{edge $e \in \pi$}
+\IF{ residual capacity($e$) $\leq \Delta$}
+\STATE $\Delta \gets $ residual capacity($e$)
+\ENDIF
+\ENDFOR
+
+\FORALL{edge $e \in \pi$}
+
+\IF{$e$ is a forward edge}
+\STATE flow($e$) $\gets $ flow($e$) $+ \Delta$
+\ELSE
+\STATE flow($e$) $\gets $ flow($e$) $- \Delta$
+\ENDIF
+
+\ENDFOR
+
 \ELSE
 \STATE $stop \gets$ \TRUE
 \ENDIF
 \UNTIL{$stop$}
 
 \end{algorithmic}
+\end{algorithm}
