@@ -25,12 +25,13 @@ public class GraphView extends JPanel {
 	
 	private int scale = 3;
 	
-	public GraphView(Graph g){
-		setGraph(g);
+	public GraphView(){
+		
 	}
 	
 	public void setGraph(Graph g){
 		this.graph = g;
+		updateGraph();
 	}
 	
 	public void paint(Graphics g){
