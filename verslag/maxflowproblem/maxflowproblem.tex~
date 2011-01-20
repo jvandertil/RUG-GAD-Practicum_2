@@ -5,7 +5,7 @@ Om het probleem van het vinden van een maximum flow te kunnen begrijpen, volgt h
 Een graaf is een verzameling punten (knopen) die verbonden zijn door lijnen (kanten). De kanten van een graaf kunnen een richting en/of een gewicht hebben. Een voorbeeld van een simpele graaf is te zien in figuur \ref{fig:6ngraph}.
 
 \begin{figure}[h]
-	\includegraphics[width=0.5\linewidth]{maxflowproblem/6n-graph}
+	%\includegraphics[width=0.5\linewidth]{maxflowproblem/6n-graph}
 	\centering
 	\caption{Een ongerichte en ongewogen graaf met 6 nodes}
 	\label{fig:6ngraph}
@@ -14,7 +14,7 @@ Een graaf is een verzameling punten (knopen) die verbonden zijn door lijnen (kan
 In figuur \ref{fig:flownetwork} is een voorbeeld van een flow network te zien. De flow in deze afbeelding is maximaal, immers de capaciteit van de beide kanten die leiden naar \textit{t} is volledig benut. Tevens is het duidelijk dat dit een gerichte (pijlen in plaats van lijnen als kanten) en gewogen (getallen bij de kanten) graaf is.
 
 \begin{figure}[h]
-\includegraphics[width=0.5\linewidth]{maxflowproblem/max_flow}%
+%\includegraphics[width=0.5\linewidth]{maxflowproblem/max_flow}%
 \centering
 \caption{Voorbeeld van een flow netwerk met een maximum flow van \textit{s} naar \textit{t}. De getallen zijn flow / max capaciteit.}%
 \label{fig:flownetwork}%
