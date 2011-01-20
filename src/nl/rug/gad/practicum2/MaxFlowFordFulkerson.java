@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import nl.rug.gad.practicum2.Edge.EdgeStatus;
 import nl.rug.gad.practicum2.Vertex.VertexStatus;
 
@@ -29,11 +32,10 @@ public class MaxFlowFordFulkerson {
 		}
 	}
 	
-	public void nextFlow(Method m){
+	public void nextFlow(Method m){		
 		//Reset all directions in graph
 		resetGraph(true);
 		List<Edge> augmentedPath = getAugmentedPath(m);
-		//printAugmentedPath(augmentedPath);
 		if(augmentedPath.size() > 0){
 			int resCap = getResidualCapacity(augmentedPath);
 			pushResCap(augmentedPath, resCap);
@@ -41,13 +43,6 @@ public class MaxFlowFordFulkerson {
 			maxFlowFound = true;
 		}
 		graphChanged(); //Update View
-	}
-	
-	private void printAugmentedPath(List<Edge> path){
-		System.out.println("Augmented Path");
-		for(Edge e : path){
-			System.out.println(e.start.id + " to " + e.end.id);
-		}
 	}
 	
 	public void resetGraph(boolean statusOnly){

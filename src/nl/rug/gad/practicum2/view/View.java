@@ -17,11 +17,11 @@ public class View extends JFrame {
 	private GraphView graphView;
 	private Controllers controllers;
 	
-	public View(Graph g){
+	public View(){
 		super("Ford Fulkerson Algorithm!");
 		setLayout(new GridLayout());
 		
-		graphView = new GraphView(g);
+		graphView = new GraphView();
 		controllers = new Controllers();
 		
 		JScrollPane scrollPane = new JScrollPane(graphView);
@@ -42,6 +42,10 @@ public class View extends JFrame {
 		setVisible(true);
 	}
 	
+	public void loadGraph(Graph g){
+		graphView.setGraph(g);
+	}
+	
 	public void setLabelText(String text){
 		controllers.setLabelText(text);
 	}
@@ -56,6 +60,14 @@ public class View extends JFrame {
 	
 	public Method getSelectedMethod(){
 		return controllers.getSelectedMethod();
+	}
+	
+	public void addLoadListener(ActionListener al){
+		controllers.addLoadListener(al);
+	}
+	
+	public String getFileName(){
+		return controllers.getFileName();
 	}
 	
 	public void updateGraph(){
