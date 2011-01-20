@@ -18,6 +18,7 @@ public class Controller {
 	public Controller(){
 		view = new View();
 		view.addNextFlowListener(nextFlowListener());
+		view.addFindMaxFlowListener(findMaxFlowListener());
 		view.addResetListener(resetListener());
 		view.addLoadListener(loadFileListener());
 	}
@@ -42,6 +43,22 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				loadGraphFile(view.getFileName());
+			}
+		};
+	}
+	
+	private ActionListener findMaxFlowListener(){
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(mfff == null){
+					JOptionPane.showMessageDialog(new JFrame(),
+						    "No graph loaded yet!",
+						    "Warning!",
+						    JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				mfff.findMaxFlow(view.getSelectedMethod());
 			}
 		};
 	}

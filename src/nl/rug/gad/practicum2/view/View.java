@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import nl.rug.gad.practicum2.Graph;
-import nl.rug.gad.practicum2.MaxFlowFordFulkerson.Method;
+import nl.rug.gad.practicum2.augmentedpaths.AugmentedPath.Method;
 
 public class View extends JFrame {
 
@@ -56,6 +56,10 @@ public class View extends JFrame {
 	
 	public void addNextFlowListener(ActionListener al){
 		controllers.addNextFlowButtonListener(al);
+	}
+	
+	public void addFindMaxFlowListener(ActionListener al){
+		controllers.addFindMaxFlowListener(al);
 	}
 	
 	public Method getSelectedMethod(){

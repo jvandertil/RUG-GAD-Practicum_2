@@ -30,13 +30,21 @@ public class Vertex implements Comparable<Vertex> {
 		outgoingEdges.add(e);
 	}
 	
+	public int getResidualCapacity(Edge e){
+		if (e.start.equals(this)) {
+			return e.capacity - e.flow;
+		} else {
+			return e.flow;
+		}
+	}
+	
 	public List<Edge> getAllEdges(){
 		List<Edge> unionEdge = new LinkedList<Edge>();
 		unionEdge.addAll(this.incomingEdges);
 		unionEdge.addAll(this.outgoingEdges);
 		return unionEdge;
 	}
-
+	
 	@Override
 	public int compareTo(Vertex v) {
 		return -this.maxFlow.compareTo(v.maxFlow);

@@ -11,12 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import nl.rug.gad.practicum2.MaxFlowFordFulkerson.Method;
+import nl.rug.gad.practicum2.augmentedpaths.AugmentedPath.Method;
 
 public class Controllers extends JPanel {
 
 	private static final long serialVersionUID = 2396396168572312934L;
 	private JButton nextFlowButton = new JButton("Next flow");
+	private JButton findMaxFlowButton = new JButton("Max flow");
 	private JComboBox methodBox;
 	private JButton resetButton = new JButton("Reset");
 	private JLabel label = new JLabel("MaxFlow: 0");
@@ -30,7 +31,7 @@ public class Controllers extends JPanel {
 	public Controllers(){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		Dimension d = new Dimension(300, 27);
+		Dimension d = new Dimension(400, 27);
 		//topBox.setPreferredSize(d);
 		topBox.setMaximumSize(d);
 		//topBox.setMinimumSize(d);
@@ -45,6 +46,7 @@ public class Controllers extends JPanel {
 		methodBox.addItem(Method.DFS);
 		methodBox.addItem(Method.BFS);
 		methodBox.addItem(Method.DIJKSTRA);
+		topBox.add(findMaxFlowButton);
 		topBox.add(methodBox);
 		topBox.add(resetButton);
 		
@@ -59,6 +61,10 @@ public class Controllers extends JPanel {
 		
 		//add(Box.createVerticalGlue());
 
+	}
+	
+	public void addFindMaxFlowListener(ActionListener al){
+		findMaxFlowButton.addActionListener(al);
 	}
 	
 	public void addResetListener(ActionListener al){

@@ -61,15 +61,29 @@ public class GraphView extends JPanel {
 		
 		for(Edge e : v.getAllEdges()){
 			Vertex opposite = graph.opposite(v, e);
+			Point p1 = new Point();
+			Point p2 = new Point();
 			if(vertexPoints.containsKey(opposite)){
-				drawEdge(e, p, vertexPoints.get(opposite), g);
+				if(e.start.equals(v)){
+					p1 = p;
+					p2 = vertexPoints.get(opposite);
+				} else {
+					p1 = vertexPoints.get(opposite);
+					p2 = p;
+				}
 			} else {
-				Point p2 = new Point(p.x + 30, y);
+				p2 = new Point(p.x + 30, y);
 				drawVertex(opposite, p2, g);
 				vertexPoints.put(opposite, p2);
-				drawEdge(e, p, p2, g);
+				if(e.start.equals(v)){
+					p1 = p;
+				} else {
+					p1 = p2;
+					p2 = p;
+				}
 				y = y + 20;
 			}
+			drawEdge(e, p1, p2, g);
 		}
 		
 		xymap.put(p.x, y);
@@ -97,9 +111,43 @@ public class GraphView extends JPanel {
 	}
 	
 	private void drawEdge(Edge e, Point p1, Point p2, Graphics2D g){
+		p1 = new Point(p1.x * scale, p1.y * scale);
+		p2 = new Point(p2.x * scale, p2.y * scale);
+		
 		g.setColor(e.color);
-		g.drawLine(p1.x * scale, p1.y * scale, p2.x * scale, p2.y * scale);
-		g.drawString(e.flow + "/" + e.capacity, ((p1.x + p2.x) / 2) * scale, ((p1.y + p2.y) / 2) * scale);
+		g.drawLine(p1.x, p1.y, p2.x, p2.y);
+		
+		double arrowLength = 4 * scale;
+		double arrowAngle = 15;
+		double angle;
+		if(p1.y == p2.y){
+			if(p1.x < p2.x){
+				angle = 0;
+			} else {
+				angle = 180;
+			}
+		} else if(p1.x == p2.x){
+			if(p1.y < p2.y){
+				angle = 90;
+			} else {
+				angle = 270;
+			}
+		} else {
+			double xDistance = Math.abs(p2.x-p1.x);
+			double yDistance = Math.abs(p2.y-p1.y);
+			double xyDistance = Math.sqrt((xDistance)*(xDistance) + (yDistance)*(yDistance));
+			angle = Math.toDegrees(Math.acos(xDistance/xyDistance));
+		}
+		double y1 = Math.sin(Math.toRadians((angle + arrowAngle))) * arrowLength;
+		double x1 = Math.cos(Math.toRadians((angle + arrowAngle))) * arrowLength;
+		
+		double y2 = Math.sin(Math.toRadians((-angle + arrowAngle))) * arrowLength;
+		double x2 = Math.cos(Math.toRadians((-angle + arrowAngle))) * arrowLength;
+		
+		g.drawLine(p2.x, p2.y, (int)(p2.x - x1), (int)(p2.y - y1));
+		g.drawLine(p2.x, p2.y, (int)(p2.x - x2), (int)(p2.y + y2));
+		
+		g.drawString(e.flow + "/" + e.capacity, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
 		g.setColor(Color.black);
 	}
 	

@@ -3,24 +3,22 @@ package nl.rug.gad.practicum2;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import nl.rug.gad.practicum2.Edge.EdgeStatus;
 import nl.rug.gad.practicum2.Vertex.VertexStatus;
+import nl.rug.gad.practicum2.augmentedpaths.AugmentedPath;
+import nl.rug.gad.practicum2.augmentedpaths.AugmentedPathBFS;
+import nl.rug.gad.practicum2.augmentedpaths.AugmentedPathDFS;
+import nl.rug.gad.practicum2.augmentedpaths.AugmentedPathDijkstra;
+import nl.rug.gad.practicum2.augmentedpaths.AugmentedPath.Method;
 
 public class MaxFlowFordFulkerson {
-	
-	public enum Method {DFS, BFS, DIJKSTRA}
 	
 	private Graph g;
 	private Vertex s, t;
 	
 	private ActionListener listener;
-	private boolean maxFlowFound = false;
 	
 	//MaxFlowFordFulkerson algorithm described on page 390
 	public MaxFlowFordFulkerson(Graph g, Vertex s, Vertex t){
@@ -32,6 +30,12 @@ public class MaxFlowFordFulkerson {
 		}
 	}
 	
+	public void findMaxFlow(Method m){
+		while(!AugmentedPath.getProfiler().getMaxFlowFound()){
+			nextFlow(m);
+		}
+	}
+	
 	public void nextFlow(Method m){		
 		//Reset all directions in graph
 		resetGraph(true);
@@ -40,13 +44,12 @@ public class MaxFlowFordFulkerson {
 			int resCap = getResidualCapacity(augmentedPath);
 			pushResCap(augmentedPath, resCap);
 		} else {
-			maxFlowFound = true;
+			AugmentedPath.getProfiler().setMaxFlowFound(true);
 		}
 		graphChanged(); //Update View
 	}
 	
 	public void resetGraph(boolean statusOnly){
-		maxFlowFound = false;
 		for(Edge e : g.edgeList){
 			e.status = EdgeStatus.UNEXPLORED;
 			e.color = Color.black;
@@ -61,30 +64,28 @@ public class MaxFlowFordFulkerson {
 			}
 		}
 		if(!statusOnly){
+			AugmentedPath.getProfiler().reset();
 			graphChanged(); //Update view
 		}
 	}
 	
 	private List<Edge> getAugmentedPath(Method m){
-		List<Edge> augmentedPath = new LinkedList<Edge>();
+		AugmentedPath ap;
 		switch (m) {
 		case DFS:
-			augmentedPath = AugmentingPath.getAugmentedPathDFS(g, s, t);
+			ap = new AugmentedPathDFS();
 			break;
 		case BFS:
-			augmentedPath = AugmentingPath.getAugmentedPathBFS(g, s, t);
+			ap = new AugmentedPathBFS();
 			break;
 		case DIJKSTRA:
-			augmentedPath = AugmentingPath.getAugmentedPathDijkstra(g, s, t);
+			ap = new AugmentedPathDijkstra();
 			break;
 		default:
-			augmentedPath = new LinkedList<Edge>();
+			ap = AugmentedPath.NULL;
 			break;
 		}
-		for(Edge e : augmentedPath){
-			e.color = Color.blue;
-		}
-		return augmentedPath;
+		return ap.getPath(g, s, t);
 	}
 	
 	//Computes the residual capacity of the augmenting path
@@ -107,6 +108,7 @@ public class MaxFlowFordFulkerson {
 	//Pushes the residual capacity along the augmenting path
 	private void pushResCap(List<Edge> augmentedPath, int resCap){
 		for(Edge e : augmentedPath){
+			e.color = Color.blue;
 			if(e.forward){
 				e.flow = e.flow + resCap;
 			} else {
@@ -116,19 +118,8 @@ public class MaxFlowFordFulkerson {
 	}
 	
 	private void graphChanged(){
-		int maxFlow = 0;
-		for(Edge e : g.startPoint.outgoingEdges){
-			maxFlow += e.flow;
-		}
-		for(Edge e : g.startPoint.incomingEdges){
-			maxFlow += e.capacity - e.flow;
-		}
-		String message = "";
-		if(maxFlowFound){
-			message = "Done! ";
-		}
-		message += "MaxFlow: " + maxFlow;
-		ActionEvent ae = new ActionEvent(g.startPoint, g.startPoint.id, message);
+		AugmentedPath.getProfiler().update(g);
+		ActionEvent ae = new ActionEvent(g.startPoint, g.startPoint.id, AugmentedPath.getProfiler().getStatus());
 		listener.actionPerformed(ae);
 	}
 	
