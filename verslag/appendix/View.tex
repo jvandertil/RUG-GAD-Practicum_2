@@ -1,0 +1,74 @@
+\chapter{View}
+\lstset{language=Java}
+\begin{lstlisting}[caption=View Source Code]
+public class View extends JFrame {
+
+	private static final long serialVersionUID = -5640918753333009588L;
+	
+	private GraphView graphView;
+	private Controllers controllers;
+	
+	public View(){
+		super("Ford Fulkerson Algorithm!");
+		setLayout(new GridLayout());
+		
+		graphView = new GraphView();
+		controllers = new Controllers();
+		
+		JScrollPane scrollPane = new JScrollPane(graphView);
+		//scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		Dimension d = new Dimension(400, 400);
+		scrollPane.setPreferredSize(d);
+		scrollPane.setMaximumSize(d);
+		scrollPane.setMinimumSize(d);
+		add(scrollPane);
+		
+		d.width = 100;
+		controllers.setPreferredSize(d);
+		controllers.setMaximumSize(d);
+		controllers.setMinimumSize(d);
+		add(controllers);
+		
+		setSize(700, 400);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	
+	public void loadGraph(Graph g){
+		graphView.setGraph(g);
+	}
+	
+	public void setLabelText(String text){
+		controllers.setLabelText(text);
+	}
+	
+	public void addResetListener(ActionListener al){
+		controllers.addResetListener(al);
+	}
+	
+	public void addNextFlowListener(ActionListener al){
+		controllers.addNextFlowButtonListener(al);
+	}
+	
+	public void addFindMaxFlowListener(ActionListener al){
+		controllers.addFindMaxFlowListener(al);
+	}
+	
+	public Method getSelectedMethod(){
+		return controllers.getSelectedMethod();
+	}
+	
+	public void addLoadListener(ActionListener al){
+		controllers.addLoadListener(al);
+	}
+	
+	public String getFileName(){
+		return controllers.getFileName();
+	}
+	
+	public void updateGraph(){
+		graphView.updateGraph();
+	}
+}
+\end{lstlisting}
