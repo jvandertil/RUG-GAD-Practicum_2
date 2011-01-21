@@ -27,6 +27,7 @@ public class Controllers extends JPanel {
 	private Box topBox = Box.createHorizontalBox();
 	private Box middleBox = Box.createHorizontalBox();
 	private Box bottomBox = Box.createHorizontalBox();
+	private Box labelBox = Box.createVerticalBox();
 	
 	public Controllers(){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -36,7 +37,9 @@ public class Controllers extends JPanel {
 		topBox.setMaximumSize(d);
 		//topBox.setMinimumSize(d);
 		middleBox.setMaximumSize(d);
-		bottomBox.setMaximumSize(d);
+		
+		Dimension d2 = new Dimension(400, 200);
+		bottomBox.setMaximumSize(d2);
 		add(topBox);
 		add(middleBox);
 		add(bottomBox);
@@ -57,8 +60,13 @@ public class Controllers extends JPanel {
 		//inputFileField.setMinimumSize(d);
 		middleBox.add(inputFileField);
 		
-		bottomBox.add(label);
-		
+		bottomBox.add(labelBox);
+		labelBox.add(label);
+		labelBox.add(new JLabel("M = MaxFlow"));
+		labelBox.add(new JLabel("V = Vertexes visisted"));
+		labelBox.add(new JLabel("E = Edges visited"));
+		labelBox.add(new JLabel("I = Number of iterations"));
+		labelBox.add(new JLabel("T = Time taken in nanoseconds"));
 		//add(Box.createVerticalGlue());
 
 	}

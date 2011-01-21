@@ -10,6 +10,7 @@ public class Profiler {
 	private int visitedVertexes;
 	private int visitedEdges;
 	private long totalTime;
+	private int iterations;
 	
 	private long currentTime;
 	
@@ -20,6 +21,7 @@ public class Profiler {
 		visitedEdges = 0;
 		totalTime = 0;
 		currentTime = 0;
+		iterations = 0;
 	}
 	
 	public void startStopwatch(){
@@ -68,10 +70,11 @@ public class Profiler {
 			message += "Done!";
 		}
 		
-		message += " MaxFlow: " + maxFlow;
-		message += " Vertex: " + visitedVertexes;
-		message += " Edge: " + visitedEdges;
-		message += " Time: " + totalTime + " ns";
+		message += " M: " + maxFlow;
+		message += " V: " + visitedVertexes;
+		message += " E: " + visitedEdges;
+		message += " I: " + iterations;
+		message += " T: " + totalTime + " ns";
 				
 		return message;
 	}
