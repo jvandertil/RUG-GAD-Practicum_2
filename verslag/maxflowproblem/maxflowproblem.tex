@@ -32,7 +32,7 @@ De eisen die gesteld worden aan een geldige flow zijn:
 \begin{itemize}
 	\item De flow mag nooit groter zijn de de capacity van een kant. $0 \leq flow(u,v) \leq capacity(u,v)$
 	\item De netto flow van een node is gelijk aan 0. Dit geldt niet voor \textit{s} of \textit{t}.$$\sum_{e \in E^-}\sum_{v \in E^+}{flow(e)-flow(v)} = 0$$
-Waar $E^-$ de verzameling van uitgaande kanten is en $E^+$ de verzameling uitgaande kanten van knoop $E$ is.
+Waar $E^-$ de verzameling van uitgaande kanten is en $E^+$ de verzameling inkomende kanten van knoop $E$ is.
 \end{itemize}
 
 Omdat het Ford-Fulkerson algoritme niet aangeeft op welke manier er een 'augmenting path' gevonden dient te worden, zijn er meerdere methodes beschikbaar.

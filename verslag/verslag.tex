@@ -84,6 +84,7 @@
 \begin{document}
 \pagestyle{empty} %No headings for the first pages.
 \floatname{algorithm}{Algoritme} % Geen automatische vertaling van Algorithm -> Algoritme
+\renewcommand{\listalgorithmname}{Lijst van algoritmen}
 
 %% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% ==> Write your text here or include other files.
@@ -121,6 +122,10 @@
 \clearpage
 \addcontentsline{toc}{chapter}{Lijst van tabellen}
 \listoftables
+
+\clearpage
+\addcontentsline{toc}{chapter}{\listalgorithmname}
+\listofalgorithms
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
