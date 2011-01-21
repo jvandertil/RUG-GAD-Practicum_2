@@ -25,7 +25,7 @@ Het probleem is nu om een flow te vinden van \textit{s} naar \textit{t} die maxi
 \section{Ford-Fulkerson algoritme}
 \label{sec:fordfulkerson}
 
-Het algoritme van Ford \& Fulkerson werkt eigenlijk volgens een heel simpel principe. Zolang er een pad is van \textit{s} naar \textit{t} met beschikbare capaciteit, dan wordt de flow daar langs gestuurd. Dit wordt herhaalt todat er geen pad meer mogelijk is. Een pad van \textit{s} naar \textit{t} met beschikbare capaciteit wordt een 'augmenting path' genoemd.
+Het algoritme van Ford \& Fulkerson werkt eigenlijk volgens een heel simpel principe. Zolang er een pad is van \textit{s} naar \textit{t} met beschikbare capaciteit, dan wordt de flow daar langs gestuurd. Dit wordt herhaalt totdat er geen pad meer mogelijk is. Een pad van \textit{s} naar \textit{t} met beschikbare capaciteit wordt een 'augmenting path' genoemd.
 
 De eisen die gesteld worden aan een geldige flow zijn:
 
@@ -43,8 +43,6 @@ De methodes die onderzocht zullen worden in dit document zijn:
 	\item Breadth-first search;
 	\item Priority-first search.
 \end{enumerate}
-
-In het geval van een breadth-first search is het algoritme ook bekend als het Edmonds-Karp algoritme.
 
 \subsection{Pseudocode}
 
@@ -91,3 +89,4 @@ De pseudocode van het algoritme is te vinden in algoritme \ref{alg:FordFulkerson
 
 \end{algorithmic}
 \end{algorithm}
+

@@ -5,7 +5,7 @@ Om het probleem van het vinden van een maximum flow te kunnen begrijpen, volgt h
 Een graaf is een verzameling punten (knopen) die verbonden zijn door lijnen (kanten). De kanten van een graaf kunnen een richting en/of een gewicht hebben. Een voorbeeld van een simpele graaf is te zien in figuur \ref{fig:6ngraph}.
 
 \begin{figure}[h]
-	%\includegraphics[width=0.5\linewidth]{maxflowproblem/6n-graph}
+	\includegraphics[width=0.5\linewidth]{maxflowproblem/6n-graph}
 	\centering
 	\caption{Een ongerichte en ongewogen graaf met 6 nodes}
 	\label{fig:6ngraph}
@@ -14,7 +14,7 @@ Een graaf is een verzameling punten (knopen) die verbonden zijn door lijnen (kan
 In figuur \ref{fig:flownetwork} is een voorbeeld van een flow network te zien. De flow in deze afbeelding is maximaal, immers de capaciteit van de beide kanten die leiden naar \textit{t} is volledig benut. Tevens is het duidelijk dat dit een gerichte (pijlen in plaats van lijnen als kanten) en gewogen (getallen bij de kanten) graaf is.
 
 \begin{figure}[h]
-%\includegraphics[width=0.5\linewidth]{maxflowproblem/max_flow}%
+\includegraphics[width=0.5\linewidth]{maxflowproblem/max_flow}%
 \centering
 \caption{Voorbeeld van een flow netwerk met een maximum flow van \textit{s} naar \textit{t}. De getallen zijn flow / max capaciteit.}%
 \label{fig:flownetwork}%
@@ -25,7 +25,7 @@ Het probleem is nu om een flow te vinden van \textit{s} naar \textit{t} die maxi
 \section{Ford-Fulkerson algoritme}
 \label{sec:fordfulkerson}
 
-Het algoritme van Ford \& Fulkerson werkt eigenlijk volgens een heel simpel principe. Zolang er een pad is van \textit{s} naar \textit{t} met beschikbare capaciteit, dan wordt de flow daar langs gestuurd. Dit wordt herhaalt todat er geen pad meer mogelijk is. Een pad van \textit{s} naar \textit{t} met beschikbare capaciteit wordt een 'augmenting path' genoemd.
+Het algoritme van Ford \& Fulkerson werkt eigenlijk volgens een heel simpel principe. Zolang er een pad is van \textit{s} naar \textit{t} met beschikbare capaciteit, dan wordt de flow daar langs gestuurd. Dit wordt herhaalt totdat er geen pad meer mogelijk is. Een pad van \textit{s} naar \textit{t} met beschikbare capaciteit wordt een 'augmenting path' genoemd.
 
 De eisen die gesteld worden aan een geldige flow zijn:
 
@@ -48,7 +48,13 @@ In het geval van een breadth-first search is het algoritme ook bekend als het Ed
 
 \subsection{Pseudocode}
 
+De pseudocode van het algoritme is te vinden in algoritme \ref{alg:FordFulkerson}.
+
+\begin{algorithm}[h]
+\caption{Ford-Fulkerson Algorithm}
+\label{alg:FordFulkerson}
 \begin{algorithmic}
+\REQUIRE Input: Flow network $N$ containing graph $G$
 \FORALL{edge $e \in N$}
  \STATE flow($e$) $\gets 0$
 \ENDFOR
@@ -56,12 +62,33 @@ In het geval van een breadth-first search is het algoritme ook bekend als het Ed
 \STATE $stop \gets$ \FALSE
 
 \REPEAT
-\STATE traverse G starting at $s$ to find an augmenting path to $t$ ($\pi$)
+\STATE traverse $G$ starting at $s$ to find an augmenting path to $t$ ($\pi$)
 
-\IF{an augmenting path $pi$ exists}
+\IF{an augmenting path $\pi$ exists}
+
+\STATE $\Delta \gets +\infty$
+
+\FORALL{edge $e \in \pi$}
+\IF{ residual capacity($e$) $\leq \Delta$}
+\STATE $\Delta \gets $ residual capacity($e$)
+\ENDIF
+\ENDFOR
+
+\FORALL{edge $e \in \pi$}
+
+\IF{$e$ is a forward edge}
+\STATE flow($e$) $\gets $ flow($e$) $+ \Delta$
+\ELSE
+\STATE flow($e$) $\gets $ flow($e$) $- \Delta$
+\ENDIF
+
+\ENDFOR
+
 \ELSE
 \STATE $stop \gets$ \TRUE
 \ENDIF
 \UNTIL{$stop$}
 
 \end{algorithmic}
+\end{algorithm}
+
