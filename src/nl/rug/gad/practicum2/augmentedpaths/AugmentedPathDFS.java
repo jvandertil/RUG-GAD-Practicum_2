@@ -1,5 +1,6 @@
 package nl.rug.gad.practicum2.augmentedpaths;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,16 +23,12 @@ public class AugmentedPathDFS extends AugmentedPath {
 		s.status = VertexStatus.EXPLORED;
 		profiler.visitedVertex();
 		stop = false;
-		if(s.equals(t)){
-			stop = true;
-			return parents;
-		}
 		for (Edge e : s.getAllEdges()) {
 			if (e.status == EdgeStatus.UNEXPLORED
 					&& s.getResidualCapacity(e) > 0) {
 				profiler.visitedEdge();
 				Vertex w = g.opposite(s, e);
-				if (canContinue(w, e, t)) {
+				if (w.status == VertexStatus.UNEXPLORED) {
 					e.status = EdgeStatus.DISCOVERY;
 					//profiler.visitedVertex();
 					parents.put(w, e);
@@ -39,6 +36,10 @@ public class AugmentedPathDFS extends AugmentedPath {
 						e.forward = true;
 					} else {
 						e.forward = false;
+					}
+					if(s.equals(t)){
+						stop = true;
+						return parents;
 					}
 					getPathDFS(g, w, t, parents);
 				} else {
@@ -49,17 +50,6 @@ public class AugmentedPathDFS extends AugmentedPath {
 				return parents;
 			}
 		}
-		return parents;
-	}
-	
-	private boolean canContinue(Vertex v, Edge source, Vertex destination) {
-		for (Edge e : v.getAllEdges()) {
-			if (((v.getResidualCapacity(e) > 0 && !e.equals(source)) || 
-						v.equals(destination)) && 
-				v.status == VertexStatus.UNEXPLORED) {
-				return true;
-			}
-		}
-		return false;
+		return new HashMap<Vertex, Edge>();
 	}
 }

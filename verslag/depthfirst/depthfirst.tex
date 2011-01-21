@@ -1,2 +1,30 @@
 \chapter{Depth-first search}
 \label{chap:depthfirst}
+
+De eerste methode die onderzocht is voor het zoeken naar een augmented path is de Depth-first search methode. Deze methode zal, zoals de naam suggereert, de diepte in gaan op zoek naar $t$. 
+
+Tijdens het zoeken naar $t$ worden de edges gelabeld met $discovery$, $unexplored$ en $back$. 
+
+\subsection{Pseudocode}
+De pseudocode waar de code op gebaseerd is, is te vinden in algoritme \ref{alg:DFS}.
+
+\begin{algorithm}[h]
+\caption{Depth-first search Algorithm}
+\label{alg:DFS}
+\begin{algorithmic}
+\REQUIRE Input: Graph g, Start vertex s, End vertex t, HashMap parents with vertexes and its parent edges
+\STATE Label s as $EXPLORED$
+\FORALL{edge $e \in s.incidentEdges$}
+\IF e is not labeled as $UNEXPLORED$ && s.residualCapacity(e) > 0
+\STATE w $\gets $ g.opposite(s, e)
+\IF w is labeled as $UNEXPLORED$
+\STATE label $e$ as $DISCOVERY$ edge
+\STATE set $e$ as parent of $w$ in the hashmap parents
+\STATE recursive call with g, w, t and parents
+\ELSE
+\STATE label $e$ as $BACK$ edge
+\ENDIF
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
