@@ -1,3 +1,4 @@
 \contentsline {algorithm}{\numberline {1}{\ignorespaces Ford-Fulkerson Algorithm}}{5}
 \contentsline {algorithm}{\numberline {2}{\ignorespaces Depth-first search Algorithm}}{7}
-\contentsline {algorithm}{\numberline {3}{\ignorespaces Breadth-first search path finding}}{9}
+\contentsline {algorithm}{\numberline {3}{\ignorespaces Breadth-first search path finding}}{10}
+\contentsline {algorithm}{\numberline {4}{\ignorespaces Dijkstra's Algorithm}}{12}
