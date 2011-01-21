@@ -16,9 +16,9 @@ De pseudocode waar de code op gebaseerd is, is te vinden in algoritme \ref{alg:D
 \REQUIRE Input: Graph g, Start vertex s, End vertex t, HashMap parents with vertexes and its parent edges
 \STATE Label s as $EXPLORED$
 \FORALL{edge $e \in s.incidentEdges$}
-\IF e is not labeled as $UNEXPLORED$ && s.residualCapacity(e) > 0
-\STATE w $\gets $ g.opposite(s, e)
-\IF w is labeled as $UNEXPLORED$
+\IF{e is not labeled as \textit{UNEXPLORED} $\land$ s.residualCapacity(e) $> 0$}
+\STATE w $\gets$ g.opposite(s, e)
+\IF{w is labeled as $UNEXPLORED$}
 \STATE label $e$ as $DISCOVERY$ edge
 \STATE set $e$ as parent of $w$ in the hashmap parents
 \STATE recursive call with g, w, t and parents
