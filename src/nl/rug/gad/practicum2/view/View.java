@@ -25,6 +25,8 @@ public class View extends JFrame {
 		controllers = new Controllers();
 		
 		JScrollPane scrollPane = new JScrollPane(graphView);
+		//scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		Dimension d = new Dimension(400, 400);
 		scrollPane.setPreferredSize(d);
 		scrollPane.setMaximumSize(d);

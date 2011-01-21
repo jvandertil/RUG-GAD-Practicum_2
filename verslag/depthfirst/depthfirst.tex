@@ -3,8 +3,8 @@
 
 De eerste methode die onderzocht is voor het zoeken naar een augmented path is de Depth-first search methode. Deze methode zal, zoals de naam suggereert, de diepte in gaan op zoek naar $t$. 
 
-
-Tijdens het zoeken naar $t$ worden de edges gelabeld met $discovery$, $unexplored$ en $back$. 
+De recursieve methode DFS verwacht als invoer een graaf $g$, een start vertex $s$, een eind vertex $t$ en een map $parents$. Deze map wordt later gebruikt om de weg van $t$ naar $s$ te vinden. Bij elke aanroep zal $s$ gelabeld worden als $EXPLORED$. Hierna zullen alle aanliggende kanten van $s$ bijlangs gegaan worden om te kijken of hier nog een eventueel pad mogelijk is. Dit wordt gedaan door te kijken naar de overstaande knoop $w$ via $e$. Wanneer $w$ gelabeld is als $UNEXPLORED$ en de kant $e$ nog een capaciteit heeft, is hier een pad mogelijk. $e$ zal nu gezet worden als de parent van $w$ en daarnaast ook nog gelabeld worden als $DISCOVERY$. Nu zal een recursieve aanroep gedaan worden met de parameters respectievelijk $g$, $w$, $t$ en $parents$.
+Als $w$ niet gelabeld is als $UNEXPLORED$ zal $e$ gelabeld worden als $BACK$.
 
 \section{Pseudocode}
 De pseudocode waar de code op gebaseerd is, is te vinden in algoritme \ref{alg:DFS}.

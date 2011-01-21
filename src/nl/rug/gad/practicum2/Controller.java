@@ -35,6 +35,7 @@ public class Controller {
 		Graph graph = GraphBuilder.buildGraph(file);
 		mfff = new MaxFlowFordFulkerson(graph, graph.startPoint, graph.endPoint);
 		mfff.setGraphListener(updateViewListener());
+		mfff.completeReset();
 		view.loadGraph(graph);
 	}
 	

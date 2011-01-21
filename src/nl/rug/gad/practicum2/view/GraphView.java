@@ -107,7 +107,7 @@ public class GraphView extends JPanel {
 		g.fillOval(p.x - (1 * scale), p.y - (1 * scale), 2 * scale, 2 * scale);
 		g.setColor(Color.black);
 		g.drawString(v.id + "", p.x + scale, p.y - scale);
-		updateSize(p);
+		updateSize(p, g);
 	}
 	
 	private void drawEdge(Edge e, Point p1, Point p2, Graphics2D g){
@@ -157,17 +157,18 @@ public class GraphView extends JPanel {
 		g.setColor(Color.black);
 	}
 	
-	private void updateSize(Point p){
-		Dimension d = new Dimension(getWidth(), getHeight());
+	private void updateSize(Point p, Graphics g){
+		Dimension d = new Dimension(getPreferredSize().width, getPreferredSize().height);
 		if(p.x > d.width){
 			d.width = p.x + 30;
 		}
 		if(p.y > d.height){
-			d.height = p.y + 30;
+			d.height = p.y + 30;		
 		}
 		setPreferredSize(d);
 		setMaximumSize(d);
 		setMinimumSize(d);
+		setSize(d);
 	}
 	
 	public void updateGraph(){
