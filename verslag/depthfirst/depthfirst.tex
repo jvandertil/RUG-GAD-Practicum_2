@@ -10,8 +10,8 @@ De eerste methode die onderzocht is voor het zoeken naar een augmented path is d
  \label{fig:depthFirstTree}
 \end{figure}
 
-De recursieve methode DFS verwacht als invoer een graaf $g$, een startknoop $s$, een eindknoop $t$ en een map $parents$. Deze map wordt later gebruikt om de weg van $t$ naar $s$ te vinden. Bij elke aanroep zal $s$ gelabeld worden als \textit{EXPLORED} $\land$. Hierna zullen alle aanliggende kanten van $s$ bijlangs gegaan worden om te kijken of hier nog een eventueel pad mogelijk is. Dit wordt gedaan door te kijken naar de overstaande knoop $w$ via $e$. Wanneer $w$ gelabeld is als \textit{UNEXPLORED} en de kant $e$ nog een capaciteit heeft, is hier een pad mogelijk. $e$ zal nu gezet worden als de parent van $w$ en daarnaast ook nog gelabeld worden als \textit{DISCOVERY} $\land$. Nu zal een recursieve aanroep gedaan worden met de parameters respectievelijk $g$, $w$, $t$ en $parents$.
-Als $w$ niet gelabeld is als \textit{UNEXPLORED} zal $e$ gelabeld worden als \textit{BACK} $\land$.
+De recursieve methode DFS verwacht als invoer een graaf $g$, een startknoop $s$, een eindknoop $t$ en een map $parents$. Deze map wordt later gebruikt om de weg van $t$ terug naar $s$ te vinden. Bij elke aanroep zal $s$ gelabeld worden als \textit{EXPLORED}. Hierna zullen alle aanliggende kanten van $s$ bijlangs gegaan worden om te kijken of hier nog een eventueel pad mogelijk is. Dit wordt gedaan door te kijken naar de overstaande knoop $w$ via $e$. Wanneer $w$ gelabeld is als \textit{UNEXPLORED} en de kant $e$ nog een capaciteit heeft, is hier een pad mogelijk. $e$ zal nu gezet worden als de parent van $w$ en gelabeld worden als \textit{DISCOVERY}. Nu zal een recursieve aanroep gedaan worden met de parameters respectievelijk $g$, $w$, $t$ en $parents$.
+Als $w$ niet gelabeld is als \textit{UNEXPLORED} zal $e$ gelabeld worden als BACK.
 
 \section{Pseudocode}
 De pseudocode waar de code op gebaseerd is, is te vinden in algoritme \ref{alg:DFS}. De werkelijke code heeft een paar toevoegingen zodat deze stopt wanneer het eindpunt $t$ bereikt is. Wanneer dit het geval is kan met behulp van de $parents$ gezocht worden naar een pad van $s$ naar $t$ door te kijken wat de parent edge $e$ is van $t$. Nu zal gekeken worden naar de parent edge van de overstaande van $t$ via edge $e$. Door dit te doen tot er geen parent edge is zal $s$ bereikt worden.
@@ -47,13 +47,13 @@ De grafen in \ref{fig:DFSgraph1} en \ref{fig:DFSgraph2} laten de uitkomst zien v
  \hline
  Maximale flow & 5 \\
  \hline
- Knopen bezocht & 22 \\
+ Knopen bezocht & 17 \\
  \hline
- Kanten bezicht & 25 \\
+ Kanten bezocht & 18 \\
  \hline
  Iteraties & 5 \\
  \hline
- Benodigde tijd & 416.963 ns \\
+ Benodigde tijd & 70.261 ns \\
  \hline
 \end{tabularx}
 \centering
@@ -64,22 +64,22 @@ De grafen in \ref{fig:DFSgraph1} en \ref{fig:DFSgraph2} laten de uitkomst zien v
 \begin{figure}[h]
 	\includegraphics{depthfirst/DFSgraph1}
 	\centering
-	\caption{Analyse van de eerste graaf}
+	\caption{De eerste graaf}
 	\label{fig:DFSgraph1}
 \end{figure}
 
 \begin{table}[h]
  \begin{tabularx}{\linewidth}{| l | X |}
  \hline
- Maximale flow & 7 \\
+ Maximale flow & 5 \\
  \hline
- Knopen bezocht & 43 \\
+ Knopen bezocht & 31 \\
  \hline
- Kanten bezicht & 1234 \\
+ Kanten bezocht & 42 \\
  \hline
- Iteraties & 6 \\
+ Iteraties & 7 \\
  \hline
- Benodigde tijd & 350.261 ns \\
+ Benodigde tijd & 124.250 ns \\
  \hline
 \end{tabularx}
 \centering
@@ -90,7 +90,7 @@ De grafen in \ref{fig:DFSgraph1} en \ref{fig:DFSgraph2} laten de uitkomst zien v
 \begin{figure}[h]
 	\includegraphics{depthfirst/DFSgraph2}
 	\centering
-	\caption{Analyse van de tweede graaf}
+	\caption{De tweede graaf}
 	\label{fig:DFSgraph2}
 \end{figure}
 

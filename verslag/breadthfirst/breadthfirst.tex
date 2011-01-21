@@ -1,7 +1,7 @@
 \chapter{Breadth-first search}
 \label{chap:breadthfirst}
 
-De tweede manier om een augmenting path te vinden in een graaf is de breadth-first search. Deze methode, die ook gebruikt wordt in het Edmonds-Karp algoritme, vindt het kortste pad van $s$ naar $t$. Het kortste pad is in dit geval gedefineert als het pad met het laagste aantal kanten.
+De tweede manier om een augmenting path te vinden in een graaf is de breadth-first search. Deze methode wordt ook gebruikt in het Edmonds-Karp algoritme, dit algoritme is een specifieke variant van het Ford-Fulkerson algoritme. Deze methode vindt het kortste pad van $s$ naar $t$. Het kortste pad is in dit geval gedefineert als het pad met het laagste aantal kanten.
 
 Het breadth-first doorlopen van een graaf is niet anders dan dat dat bij een tree gebeurt, elk niveau wordt volledig doorzocht, voordat het algoritme naar het niveau daar onder gaat. Dit is te zien in figuur \ref{fig:breadthFirstTree}, de getallen op de knopen geven aan in welke volgorde de boom doorzocht wordt.
 
@@ -29,7 +29,7 @@ Om vervolgens het pad van $s$ naar $t$ te vinden in een graaf, wordt eerst de gr
   \WHILE{$\lnot Q$.isEmpty()}
    \STATE $v \gets Q$.dequeue()
    \FORALL{edge $e \in G$.incidentEdges($v$)}
-    \IF{$e$.state = \textit{UNEXPLORED} $\land e$.residualCapacity() $ > 0$}
+    \IF{$e$.state = \textit{UNEXPLORED} $\land v$.residualCapacity() $ > 0$}
     \STATE $w \gets G$.opposite($v$, $e$)
     \IF{$\lnot w$.state = \textit{EXPLORED}}
       \STATE $Q$.enqueue($w$)
@@ -78,11 +78,11 @@ De grafen in \ref{fig:BFSgraph1} en \ref{fig:BFSgraph2} laten de uitkomst zien v
  \hline
  Knopen bezocht & 11 \\
  \hline
- Kanten bezicht & 15 \\
+ Kanten bezocht & 15 \\
  \hline
  Iteraties & 4 \\
  \hline
- Benodigde tijd & 60.625 ns \\
+ Benodigde tijd & 57.061 ns \\
  \hline
 \end{tabularx}
 \centering
@@ -104,11 +104,11 @@ De grafen in \ref{fig:BFSgraph1} en \ref{fig:BFSgraph2} laten de uitkomst zien v
  \hline
  Knopen bezocht & 29 \\
  \hline
- Kanten bezicht & 48 \\
+ Kanten bezocht & 48 \\
  \hline
  Iteraties & 7 \\
  \hline
- Benodigde tijd & 441.687 ns \\
+ Benodigde tijd & 149.954 ns \\
  \hline
 \end{tabularx}
 \centering

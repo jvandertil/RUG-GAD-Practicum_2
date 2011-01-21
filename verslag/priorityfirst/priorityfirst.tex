@@ -4,10 +4,10 @@
 De laatste methode die onderzocht is, is Dijkstra's algoritme. Dit algoritme geeft prioriteiten aan de knopen en gaat aan de hand hiervan de knopen bijlangs.
 
 De methode verwacht als invoer een graaf $g$, een startknoop $s$ en een eindknoop $t$.
-Als eerste wordt de maxflow van alle knopen in $g$ op 0 gezet, behalve de maxflow van $s$, deze krijgt de waarde $\infty$. Al deze knopen worden toegevoegt aan een priorityqueue $Q$, de maxflow van de knopen wordt gebruikt als de prioriteit.
-Nu zal het algoritme doorgaan tot $Q$ leeg is. Elke keer zal de hoogste waarde in $Q$ verwijderd worden, deze waarde krijgt hier de naam $u$. De eerste keer zal dit $s$ zijn. Elke keer wanneer een knoop $u$ uit $Q$ gehaald wordt zullen alle kanten van $u$ bezocht worden. Voor elke kant zal de overstaande knoop ($z$) van $u$ via kant $e$ opgezocht worden. De flow die naar $z$ kan is de maxflow van $u$ of de residual capacity van $e$ als deze lager is dan de maxflow van $u$. Wanneer de flow van $u$ naar $z$ hoger is dan de huidige maxflow van $z$, zal deze bijgewerkt worden. Nu zal ook de waarde van $z$ in $Q$ geupdate worden.
+Als eerste wordt de maxflow van alle knopen in $g$ op 0 gezet, behalve de maxflow van $s$, deze krijgt de waarde $\infty$. Al deze knopen worden toegevoegd aan een priorityqueue $Q$, de maxflow van de knopen wordt gebruikt als de prioriteit.
+Nu zal het algoritme doorgaan tot $Q$ leeg is. Elke keer zal de hoogste waarde in $Q$ verwijderd worden. De eerste keer zal dit $s$ zijn. Elke keer wanneer een knoop $u$ uit $Q$ gehaald wordt zullen alle kanten van $u$ bezocht worden. Voor elke kant zal de overstaande knoop ($z$) van $u$ via kant $e$ opgezocht worden. De flow die naar $z$ kan is de maxflow van $u$ of de residual capacity van $e$ als deze lager is dan de maxflow van $u$. Wanneer de flow van $u$ naar $z$ hoger is dan de huidige maxflow van $z$, zal deze bijgewerkt worden. Nu zal ook de waarde van $z$ in $Q$ geupdate worden.
 
-\subsection{Pseudocode}
+\section{Pseudocode}
 De pseudocode waar de code op gebaseerd is is te vinden in algoritme \ref{alg:DIJKSTRA}.
 De werkelijke code heeft een paar toevoegingen zodat deze stopt wanneer het eindpunt $t$ bereikt is. Wanneer dit het geval is kan met behulp van de $parents$ gezocht worden naar een pad van $s$ naar $t$ door te kijken wat de parent edge $e$ is van $t$. Nu zal gekeken worden naar de parent edge van de overstaande van $t$ via edge $e$. Door dit te doen tot er geen parent edge is zal $s$ bereikt worden.
 
@@ -42,7 +42,7 @@ De werkelijke code heeft een paar toevoegingen zodat deze stopt wanneer het eind
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Analyse}
+\section{Analyse}
 
 Figuur \ref{fig:PFSgraph1} en \ref{fig:PFSgraph2} laten de uitkomst zien van de analyse.
 
@@ -53,22 +53,22 @@ Figuur \ref{fig:PFSgraph1} en \ref{fig:PFSgraph2} laten de uitkomst zien van de 
  \hline
  Knopen bezocht & 18 \\
  \hline
- Kanten bezicht & 36 \\
+ Kanten bezocht & 36 \\
  \hline
  Iteraties & 4 \\
  \hline
- Benodigde tijd & 922.904 ns \\
+ Benodigde tijd & 151.140 ns \\
  \hline
 \end{tabularx}
 \centering
-\caption{Resultaten voor graaf in figuur \ref{fig:PFSgraph2}}.
-\label{tbl:PFSgraph2}
+\caption{Resultaten voor graaf in figuur \ref{fig:PFSgraph1}}.
+\label{tbl:PFSgraph1}
 \end{table}
 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{priorityfirst/PFSgraph1}
 	\centering
-	\caption{Analyse van de eerste graaf}
+	\caption{De eerste graaf}
 	\label{fig:PFSgraph1}
 \end{figure}
 
@@ -79,11 +79,11 @@ Figuur \ref{fig:PFSgraph1} en \ref{fig:PFSgraph2} laten de uitkomst zien van de 
  \hline
  Knopen bezocht & 43 \\
  \hline
- Kanten bezicht & 123 \\
+ Kanten bezocht & 123 \\
  \hline
  Iteraties & 6 \\
  \hline
- Benodigde tijd & 350.261 ns \\
+ Benodigde tijd & 361.438 ns \\
  \hline
 \end{tabularx}
 \centering
@@ -94,6 +94,6 @@ Figuur \ref{fig:PFSgraph1} en \ref{fig:PFSgraph2} laten de uitkomst zien van de 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{priorityfirst/PFSgraph2}
 	\centering
-	\caption{Analyse van de tweede graaf}
+	\caption{De tweede graaf}
 	\label{fig:PFSgraph2}
 \end{figure}
