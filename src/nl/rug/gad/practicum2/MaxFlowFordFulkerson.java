@@ -38,7 +38,8 @@ public class MaxFlowFordFulkerson {
 	
 	public void nextFlow(Method m){		
 		//Reset all directions in graph
-		resetGraph(true);
+		resetGraphStatus();
+		AugmentedPath.getProfiler().startStopwatch();
 		List<Edge> augmentedPath = getAugmentedPath(m);
 		if(augmentedPath.size() > 0){
 			int resCap = getResidualCapacity(augmentedPath);
@@ -46,26 +47,31 @@ public class MaxFlowFordFulkerson {
 		} else {
 			AugmentedPath.getProfiler().setMaxFlowFound(true);
 		}
+		AugmentedPath.getProfiler().pauseStopwatch();
 		graphChanged(); //Update View
 	}
 	
-	public void resetGraph(boolean statusOnly){
+	public void completeReset(){
 		for(Edge e : g.edgeList){
 			e.status = EdgeStatus.UNEXPLORED;
 			e.color = Color.black;
-			if(!statusOnly){
-				e.flow = 0;
-			}
+			e.flow = 0;
 		}
 		for(Vertex v : g.vertexList){
 			v.status = VertexStatus.UNEXPLORED;
-			if(!statusOnly){
-				v.maxFlow = 0;
-			}
+			v.maxFlow = 0;
 		}
-		if(!statusOnly){
-			AugmentedPath.getProfiler().reset();
-			graphChanged(); //Update view
+		AugmentedPath.getProfiler().reset();
+		graphChanged(); //Update view
+	}
+	
+	public void resetGraphStatus(){
+		for(Edge e : g.edgeList){
+			e.status = EdgeStatus.UNEXPLORED;
+			e.color = Color.black;
+		}
+		for(Vertex v : g.vertexList){
+			v.status = VertexStatus.UNEXPLORED;
 		}
 	}
 	

@@ -9,12 +9,27 @@ public class Profiler {
 	private boolean maxFlowFound;
 	private int visitedVertexes;
 	private int visitedEdges;
+	private long totalTime;
+	
+	private long currentTime;
 	
 	public void reset(){
 		maxFlow = 0;
 		maxFlowFound = false;
 		visitedVertexes = 0;
 		visitedEdges = 0;
+		totalTime = 0;
+		currentTime = 0;
+	}
+	
+	public void startStopwatch(){
+		currentTime = System.nanoTime();
+	}
+	
+	public void pauseStopwatch(){
+		if(!maxFlowFound){
+			totalTime += System.nanoTime() - currentTime;
+		}
 	}
 	
 	public void update(Graph g){
@@ -28,11 +43,15 @@ public class Profiler {
 	}
 	
 	public void visitedVertex(){
-		visitedVertexes++;
+		if(!maxFlowFound){
+			visitedVertexes++;
+		}
 	}
 	
 	public void visitedEdge(){
-		visitedEdges++;
+		if(!maxFlowFound){
+			visitedEdges++;
+		}
 	}
 	
 	public void setMaxFlowFound(boolean value){
@@ -50,8 +69,9 @@ public class Profiler {
 		}
 		
 		message += " MaxFlow: " + maxFlow;
-		message += " Vertexes visited: " + visitedVertexes;
-		message += " Edges visited: " + visitedEdges;
+		message += " Vertex: " + visitedVertexes;
+		message += " Edge: " + visitedEdges;
+		message += " Time: " + totalTime + " ns";
 				
 		return message;
 	}

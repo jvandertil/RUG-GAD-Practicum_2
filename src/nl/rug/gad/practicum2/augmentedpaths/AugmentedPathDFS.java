@@ -33,6 +33,7 @@ public class AugmentedPathDFS extends AugmentedPath {
 				Vertex w = g.opposite(s, e);
 				if (canContinue(w, e, t)) {
 					e.status = EdgeStatus.DISCOVERY;
+					//profiler.visitedVertex();
 					parents.put(w, e);
 					if (e.start.equals(s)) {
 						e.forward = true;

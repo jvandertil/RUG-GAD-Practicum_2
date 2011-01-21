@@ -90,7 +90,7 @@ public class Controller {
 						    JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				mfff.resetGraph(false);
+				mfff.completeReset();
 			}
 		};
 	}
