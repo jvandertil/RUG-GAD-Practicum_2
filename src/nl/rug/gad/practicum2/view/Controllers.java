@@ -7,8 +7,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import nl.rug.gad.practicum2.augmentedpaths.AugmentedPath.Method;
@@ -20,22 +20,19 @@ public class Controllers extends JPanel {
 	private JButton findMaxFlowButton = new JButton("Max flow");
 	private JComboBox methodBox;
 	private JButton resetButton = new JButton("Reset");
-	private JLabel label = new JLabel("MaxFlow: 0");
+	private JTextArea label = new JTextArea("");
 	private JButton loadButton = new JButton("Load");
 	private JTextField inputFileField = new JTextField("input1.txt");
 	
 	private Box topBox = Box.createHorizontalBox();
 	private Box middleBox = Box.createHorizontalBox();
 	private Box bottomBox = Box.createHorizontalBox();
-	private Box labelBox = Box.createVerticalBox();
 	
 	public Controllers(){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		Dimension d = new Dimension(400, 27);
-		//topBox.setPreferredSize(d);
 		topBox.setMaximumSize(d);
-		//topBox.setMinimumSize(d);
 		middleBox.setMaximumSize(d);
 		
 		Dimension d2 = new Dimension(400, 200);
@@ -55,19 +52,10 @@ public class Controllers extends JPanel {
 		
 		middleBox.add(loadButton);
 		
-		//inputFileField.setPreferredSize(d);
-		//inputFileField.setMaximumSize(d);
-		//inputFileField.setMinimumSize(d);
 		middleBox.add(inputFileField);
 		
-		bottomBox.add(labelBox);
-		labelBox.add(label);
-		labelBox.add(new JLabel("M = MaxFlow"));
-		labelBox.add(new JLabel("V = Vertexes visisted"));
-		labelBox.add(new JLabel("E = Edges visited"));
-		labelBox.add(new JLabel("I = Number of iterations"));
-		labelBox.add(new JLabel("T = Time taken in nanoseconds"));
-		//add(Box.createVerticalGlue());
+		label.setEditable(false);
+		bottomBox.add(label);
 
 	}
 	

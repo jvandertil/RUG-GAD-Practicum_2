@@ -76,11 +76,11 @@ public class Profiler {
 			message += "Done!";
 		}
 		
-		message += " M: " + maxFlow;
-		message += " V: " + visitedVertexes;
-		message += " E: " + visitedEdges;
-		message += " I: " + iterations;
-		message += " T: " + totalTime + " ns";
+		message += " \nMaxFlow: " + maxFlow;
+		message += " \nVertexes visited: " + visitedVertexes;
+		message += " \nEdge Visited: " + visitedEdges;
+		message += " \nIterations: " + iterations;
+		message += " \nTime taken: " + totalTime + " ns";
 				
 		return message;
 	}
