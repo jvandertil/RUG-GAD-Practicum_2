@@ -85,7 +85,7 @@ public class MaxFlowFordFulkerson {
 			ap = AugmentedPath.NULL;
 			break;
 		}
-		return ap.getPath(g, s, t);
+		return ap.getAugmentedPath(g, s, t);
 	}
 	
 	//Computes the residual capacity of the augmenting path

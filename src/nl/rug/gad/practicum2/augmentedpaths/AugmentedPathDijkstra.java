@@ -11,7 +11,7 @@ import nl.rug.gad.practicum2.Vertex;
 
 public class AugmentedPathDijkstra extends AugmentedPath {
 
-	public List<Edge> getPath(Graph g, Vertex s, Vertex t){
+	public List<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t){
 		HashMap<Vertex, Edge> parents = new HashMap<Vertex, Edge>();
 		PriorityQueue<Vertex> Q = new PriorityQueue<Vertex>();
 		for(Vertex v : g.vertexList){

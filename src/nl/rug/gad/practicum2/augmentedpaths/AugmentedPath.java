@@ -17,7 +17,7 @@ public abstract class AugmentedPath {
 	
 	public static final AugmentedPath NULL = new NullPath();
 	
-	public abstract List<Edge> getPath(Graph g, Vertex s, Vertex t);
+	public abstract List<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t);
 	
 	protected static List<Edge> findAugmentedPath(HashMap<Vertex, Edge> parents, Graph g, Vertex s, Vertex t){
 		List<Edge> augmentedPath = new LinkedList<Edge>();
@@ -44,7 +44,7 @@ public abstract class AugmentedPath {
 
 	private static final class NullPath extends AugmentedPath {
 		@Override
-		public List<Edge> getPath(Graph g, Vertex s, Vertex t) {
+		public List<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t) {
 			return Collections.emptyList();
 		}
 	}

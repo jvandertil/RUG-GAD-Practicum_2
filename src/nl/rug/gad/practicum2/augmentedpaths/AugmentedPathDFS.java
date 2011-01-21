@@ -13,7 +13,7 @@ public class AugmentedPathDFS extends AugmentedPath {
 
 	private boolean stop = false;
 	
-	public List<Edge> getPath(Graph g, Vertex s, Vertex t){
+	public List<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t){
 		HashMap<Vertex, Edge> parents = getPathDFS(g, s, t, new HashMap<Vertex, Edge>());
 		return findAugmentedPath(parents, g, s, t);
 	}

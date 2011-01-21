@@ -14,7 +14,7 @@ import nl.rug.gad.practicum2.Vertex.VertexStatus;
 
 public class AugmentedPathBFS extends AugmentedPath {
 
-	public List<Edge> getPath(Graph g, Vertex s, Vertex t) {
+	public List<Edge> getAugmentedPath(Graph g, Vertex s, Vertex t) {
 		List<Edge> path = new LinkedList<Edge>();
 		Queue<Vertex> vertexQueue = new LinkedList<Vertex>();
 		
