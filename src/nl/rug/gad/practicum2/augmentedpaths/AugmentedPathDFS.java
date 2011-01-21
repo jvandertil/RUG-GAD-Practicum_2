@@ -1,6 +1,5 @@
 package nl.rug.gad.practicum2.augmentedpaths;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,6 +49,6 @@ public class AugmentedPathDFS extends AugmentedPath {
 				return parents;
 			}
 		}
-		return new HashMap<Vertex, Edge>();
+		return parents;
 	}
 }

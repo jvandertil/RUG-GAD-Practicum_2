@@ -135,8 +135,14 @@ public class GraphView extends JPanel {
 		} else {
 			double xDistance = Math.abs(p2.x-p1.x);
 			double yDistance = Math.abs(p2.y-p1.y);
-			double xyDistance = Math.sqrt((xDistance)*(xDistance) + (yDistance)*(yDistance));
+			double xyDistance = Math.sqrt(xDistance*xDistance + yDistance*yDistance);
 			angle = Math.toDegrees(Math.acos(xDistance/xyDistance));
+			if(p2.y < p1.y){
+				angle = 360 - angle;
+			}
+			if(p2.x < p1.x){
+				angle = 180 - angle;
+			}
 		}
 		double y1 = Math.sin(Math.toRadians((angle + arrowAngle))) * arrowLength;
 		double x1 = Math.cos(Math.toRadians((angle + arrowAngle))) * arrowLength;
