@@ -1,2 +1,42 @@
 \chapter{Priority First Search}
 \label{chap:priorityfirst}
+
+De laatste methode die onderzocht is, is Dijkstra's algoritme. Dit algoritme geeft prioriteiten aan de knopen en gaat aan de hand hiervan de knopen bijlangs.
+
+De methode verwacht als invoer een graaf $g$, een startknoop $s$ en een eindknoop $t$.
+Als eerste wordt de maxflow van alle knopen in $g$ op 0 gezet, behalve de maxflow van $s$, deze krijgt de waarde \infty. Al deze knopen worden toegevoegt aan een priorityqueue $Q$, de maxflow van de knopen wordt gebruikt als de prioriteit.
+Nu zal het algoritme doorgaan tot $Q$ leeg is. Elke keer zal de hoogste waarde in $Q$ verwijderd worden. De eerste keer zal dit $s$ zijn.
+
+\subsection{Pseudocode}
+De pseudocode waar de code op gebaseerd is is te vinden in algoritme \ref{alg:DIJKSTRA}.
+
+\begin{algorithm}[h]
+\caption{Dijkstra's Algorithm}
+\label{alg:DIJKSTRA}
+\begin{algorithmic}
+\REQUIRE Input: Graph g, Start vertex s, End vertex t
+\STATE HashMap parents with vertexes and edges
+\STATE Q $\gets$ new PriorityQueue
+\FORALL{vertex $v \in g.vertexes$}
+\IF{$v = s$}
+\STATE $v.maxFlow \gets \infty$
+\ELSE
+\STATE $v.maxFlow \gets 0$
+\ENDIF
+\STATE Q.add(maxFlow, v)
+\STATE set parent to \emptyset
+\ENDFOR
+\WHILE{Q is not empty}
+\STATE $u \gets Q.removeMax()$
+\FORALL{edge $e \in u.incidentEdges$}
+\STATE $z \gets g.opposite(u, e)$
+\STATE $r \gets min(u.getResidualCapacity(e), u.maxFlow)$
+\IF{$r < z.maxFlow && e \neg= parent of z$}
+\STATE $z.maxFlow \gets r$
+\STATE set $e$ as parent of $z$
+\STATE update $z$ in $Q$
+\ENDIF
+\ENDFOR
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
