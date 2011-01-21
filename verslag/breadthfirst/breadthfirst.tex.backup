@@ -1,4 +1,0 @@
-\chapter{Breadth-first search}
-\label{chap:breadthfirst}
-
-De tweede manier om een augmenting path te vinden in een graaf is de breadth-first search. 
