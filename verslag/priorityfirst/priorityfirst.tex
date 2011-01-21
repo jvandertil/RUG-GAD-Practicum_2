@@ -32,7 +32,7 @@ De werkelijke code heeft een paar toevoegingen zodat deze stopt wanneer het eind
 \FORALL{edge $e \in u.incidentEdges$}
 \STATE $z \gets g.opposite(u, e)$
 \STATE $r \gets min(u.getResidualCapacity(e), u.maxFlow)$
-\IF{$r < z.maxFlow \land e \neg= parent of z$}
+\IF{$r < z.maxFlow \land e$ not parent of $z$}
 \STATE $z.maxFlow \gets r$
 \STATE set $e$ as parent of $z$
 \STATE update $z$ in $Q$
@@ -47,14 +47,14 @@ De werkelijke code heeft een paar toevoegingen zodat deze stopt wanneer het eind
 Figuur \ref{fig:DIJKSTRA_graph1} en \ref{fig:DIJKSTRA_graph2} laten de uitkomst zien van de analyse.
 
 \begin{figure}[h]
-	\includegraphics[width=0.5\linewidth]{priorityfirst/DIJKSTRA_graph1}
+	\includegraphics[width=\linewidth]{priorityfirst/DIJKSTRA_graph1}
 	\centering
 	\caption{Analyse van de eerste graaf}
 	\label{fig:DIJKSTRA_graph1}
 \end{figure}
 
 \begin{figure}[h]
-	\includegraphics[width=0.5\linewidth]{priorityfirst/DIJKSTRA_graph2}
+	\includegraphics[width=\linewidth]{priorityfirst/DIJKSTRA_graph2}
 	\centering
 	\caption{Analyse van de tweede graaf}
 	\label{fig:DIJKSTRA_graph2}
