@@ -38,21 +38,59 @@ De pseudocode waar de code op gebaseerd is, is te vinden in algoritme \ref{alg:D
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Analyse}
+\section{Analyse}
 
-Figuur \ref{fig:DFS_graph1} en \ref{fig:DFS_graph2} laten de uitkomst zien van de analyse.
+De grafen in \ref{fig:DFSgraph1} en \ref{fig:DFSgraph2} laten de uitkomst zien van het Ford-Fulkerson algoritme. De tabellen \ref{tbl:DFSgraph1} en \ref{tbl:DFSgraph2} geven de benchmarks weer voor de respectievelijke grafen.
+
+\begin{table}[h]
+ \begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ Maximale flow & 5 \\
+ \hline
+ Knopen bezocht & 22 \\
+ \hline
+ Kanten bezicht & 25 \\
+ \hline
+ Iteraties & 5 \\
+ \hline
+ Benodigde tijd & 416.963 ns \\
+ \hline
+\end{tabularx}
+\centering
+\caption{Resultaten voor graaf in figuur \ref{fig:DFSgraph1}}.
+\label{tbl:DFSgraph1}
+\end{table}
 
 \begin{figure}[h]
-	\includegraphics[width=0.5\linewidth]{depthfirst/DFS_graph1}
+	\includegraphics{depthfirst/DFSgraph1}
 	\centering
 	\caption{Analyse van de eerste graaf}
-	\label{fig:DFS_graph1}
+	\label{fig:DFSgraph1}
 \end{figure}
 
+\begin{table}[h]
+ \begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ Maximale flow & 7 \\
+ \hline
+ Knopen bezocht & 43 \\
+ \hline
+ Kanten bezicht & 1234 \\
+ \hline
+ Iteraties & 6 \\
+ \hline
+ Benodigde tijd & 350.261 ns \\
+ \hline
+\end{tabularx}
+\centering
+\caption{Resultaten voor graaf in figuur \ref{fig:DFSgraph2}}.
+\label{tbl:DFSgraph2}
+\end{table}
+
 \begin{figure}[h]
-	\includegraphics[width=0.5\linewidth]{depthfirst/DFS_graph2}
+	\includegraphics{depthfirst/DFSgraph2}
 	\centering
 	\caption{Analyse van de tweede graaf}
-	\label{fig:DFS_graph2}
+	\label{fig:DFSgraph2}
 \end{figure}
 
