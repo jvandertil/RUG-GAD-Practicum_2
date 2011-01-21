@@ -159,7 +159,6 @@ public class GraphView extends JPanel {
 	
 	private void updateSize(Point p, Graphics g){
 		Dimension d = new Dimension(getPreferredSize().width, getPreferredSize().height);
-		boolean sizeChanged = false;
 		if(p.x > d.width){
 			d.width = p.x + 30;
 		}
