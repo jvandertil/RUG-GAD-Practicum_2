@@ -1,7 +1,14 @@
 \chapter{Depth-first search}
 \label{chap:depthfirst}
 
-De eerste methode die onderzocht is voor het zoeken naar een augmented path is de Depth-first search methode. Deze methode zal, zoals de naam suggereert, de diepte in gaan op zoek naar $t$. 
+De eerste methode die onderzocht is voor het zoeken naar een augmented path is de Depth-first search methode. Deze methode zal, zoals de naam suggereert, de diepte in gaan op zoek naar $t$. Dit is ge\"illustreerd in figuur \ref{fig:depthFirstTree}, de getallen op de knopen geven aan in welke volgorde ze doorzocht zijn.
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.5\linewidth]{depthfirst/depthfirsttree}
+ \caption{Depth-first doorzoeken van een boom}
+ \label{fig:depthFirstTree}
+\end{figure}
 
 De recursieve methode DFS verwacht als invoer een graaf $g$, een start vertex $s$, een eind vertex $t$ en een map $parents$. Deze map wordt later gebruikt om de weg van $t$ naar $s$ te vinden. Bij elke aanroep zal $s$ gelabeld worden als $EXPLORED$. Hierna zullen alle aanliggende kanten van $s$ bijlangs gegaan worden om te kijken of hier nog een eventueel pad mogelijk is. Dit wordt gedaan door te kijken naar de overstaande knoop $w$ via $e$. Wanneer $w$ gelabeld is als $UNEXPLORED$ en de kant $e$ nog een capaciteit heeft, is hier een pad mogelijk. $e$ zal nu gezet worden als de parent van $w$ en daarnaast ook nog gelabeld worden als $DISCOVERY$. Nu zal een recursieve aanroep gedaan worden met de parameters respectievelijk $g$, $w$, $t$ en $parents$.
 Als $w$ niet gelabeld is als $UNEXPLORED$ zal $e$ gelabeld worden als $BACK$.
