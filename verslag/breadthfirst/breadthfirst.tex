@@ -66,5 +66,59 @@ Om vervolgens het pad van $s$ naar $t$ te vinden in een graaf, wordt eerst de gr
  \end{algorithmic}
 \end{algorithm}
 
-\section{Analyse}
+\clearpage
 
+\section{Analyse}
+De grafen in \ref{fig:BFSgraph1} en \ref{fig:BFSgraph2} laten de uitkomst zien van het Ford-Fulkerson algoritme. De tabellen \ref{tbl:BFSgraph1} en \ref{tbl:BFSgraph2} geven de benchmarks weer voor de respectievelijke grafen.
+
+\begin{table}[h]
+ \begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ Maximale flow & 5 \\
+ \hline
+ Knopen bezocht & 11 \\
+ \hline
+ Kanten bezicht & 15 \\
+ \hline
+ Iteraties & 4 \\
+ \hline
+ Benodigde tijd & 60.625 ns \\
+ \hline
+\end{tabularx}
+\centering
+\caption{Resultaten voor graaf in figuur \ref{fig:BFSgraph1}}.
+\label{tbl:BFSgraph1}
+\end{table}
+
+\begin{figure}[h]
+	\includegraphics{breadthfirst/bfsgraph1}
+	\centering
+	\caption{Analyse van de eerste graaf}
+	\label{fig:BFSgraph1}
+\end{figure}
+
+\begin{table}[h]
+ \begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ Maximale flow & 7 \\
+ \hline
+ Knopen bezocht & 29 \\
+ \hline
+ Kanten bezicht & 48 \\
+ \hline
+ Iteraties & 7 \\
+ \hline
+ Benodigde tijd & 441.687 ns \\
+ \hline
+\end{tabularx}
+\centering
+\caption{Resultaten voor graaf in figuur \ref{fig:BFSgraph2}}.
+\label{tbl:BFSgraph2}
+\end{table}
+
+\begin{figure}[h]
+	\includegraphics{breadthfirst/bfsgraph2}
+	\centering
+	\caption{Analyse van de tweede graaf}
+	\label{fig:BFSgraph2}
+\end{figure}

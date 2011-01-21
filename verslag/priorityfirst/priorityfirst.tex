@@ -44,18 +44,56 @@ De werkelijke code heeft een paar toevoegingen zodat deze stopt wanneer het eind
 
 \subsection{Analyse}
 
-Figuur \ref{fig:DIJKSTRA_graph1} en \ref{fig:DIJKSTRA_graph2} laten de uitkomst zien van de analyse.
+Figuur \ref{fig:PFSgraph1} en \ref{fig:PFSgraph2} laten de uitkomst zien van de analyse.
+
+\begin{table}[h]
+ \begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ Maximale flow & 5 \\
+ \hline
+ Knopen bezocht & 18 \\
+ \hline
+ Kanten bezicht & 36 \\
+ \hline
+ Iteraties & 4 \\
+ \hline
+ Benodigde tijd & 922.904 ns \\
+ \hline
+\end{tabularx}
+\centering
+\caption{Resultaten voor graaf in figuur \ref{fig:PFSgraph2}}.
+\label{tbl:PFSgraph2}
+\end{table}
 
 \begin{figure}[h]
-	\includegraphics[width=\linewidth]{priorityfirst/DIJKSTRA_graph1}
+	\includegraphics[width=\linewidth]{priorityfirst/PFSgraph1}
 	\centering
 	\caption{Analyse van de eerste graaf}
-	\label{fig:DIJKSTRA_graph1}
+	\label{fig:PFSgraph1}
 \end{figure}
 
+\begin{table}[h]
+ \begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ Maximale flow & 7 \\
+ \hline
+ Knopen bezocht & 43 \\
+ \hline
+ Kanten bezicht & 123 \\
+ \hline
+ Iteraties & 6 \\
+ \hline
+ Benodigde tijd & 350.261 ns \\
+ \hline
+\end{tabularx}
+\centering
+\caption{Resultaten voor graaf in figuur \ref{fig:PFSgraph2}}.
+\label{tbl:PFSgraph2}
+\end{table}
+
 \begin{figure}[h]
-	\includegraphics[width=\linewidth]{priorityfirst/DIJKSTRA_graph2}
+	\includegraphics[width=\linewidth]{priorityfirst/PFSgraph2}
 	\centering
 	\caption{Analyse van de tweede graaf}
-	\label{fig:DIJKSTRA_graph2}
+	\label{fig:PFSgraph2}
 \end{figure}
