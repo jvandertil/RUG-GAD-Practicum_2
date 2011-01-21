@@ -11,7 +11,7 @@ Een graaf is een verzameling punten (knopen) die verbonden zijn door lijnen (kan
 	\label{fig:6ngraph}
 \end{figure}
 
-In figuur \ref{fig:flownetwork} is een voorbeeld van een flow network te zien. De flow in deze afbeelding is maximaal, immers de capaciteit van de beide kanten die leiden naar \textit{t} is volledig benut. Tevens is het duidelijk dat dit een gerichte (pijlen in plaats van lijnen als kanten) en gewogen (getallen bij de kanten) graaf is.
+In figuur \ref{fig:flownetwork} is een voorbeeld van een flow network te zien. De flow in deze afbeelding is maximaal, immers de capaciteit van de beide kanten die leiden naar \textit{t} is volledig benut. Tevens te zien dat dit een gerichte (pijlen in plaats van lijnen als kanten) en gewogen (getallen bij de kanten) graaf is.
 
 \begin{figure}[h]
 \includegraphics[width=0.5\linewidth]{maxflowproblem/max_flow}%
@@ -46,7 +46,7 @@ De methodes die onderzocht zullen worden in dit document zijn:
 
 \subsection{Pseudocode}
 
-De pseudocode van het algoritme is te vinden in algoritme \ref{alg:FordFulkerson}.
+De pseudocode van het Ford-Fulkerson algoritme is te vinden in algoritme \ref{alg:FordFulkerson}.
 
 \begin{algorithm}[h]
 \caption{Ford-Fulkerson Algorithm}
@@ -90,3 +90,19 @@ De pseudocode van het algoritme is te vinden in algoritme \ref{alg:FordFulkerson
 \end{algorithmic}
 \end{algorithm}
 
+\section{Analyse}
+
+Voor de analyse van de zoekmethodes worden de grafen uit de figuren \ref{fig:analyseGraaf1} en \ref{fig:analyseGraaf2} gebruikt.
+\begin{figure}[h]
+\includegraphics[width=\linewidth]{maxflowproblem/graph1}
+\centering
+\caption{Analyse graaf 1}
+\label{fig:analyseGraaf1}
+\end{figure}
+
+\begin{figure}[h]
+ \includegraphics[width=\linewidth]{maxflowproblem/graph2}
+\centering
+\caption{Analyse graaf 2}
+\label{fig:analyseGraaf2}
+\end{figure}
