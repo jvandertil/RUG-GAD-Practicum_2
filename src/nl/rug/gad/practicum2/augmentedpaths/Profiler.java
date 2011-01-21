@@ -56,6 +56,12 @@ public class Profiler {
 		}
 	}
 	
+	public void incIterations(){
+		if(!maxFlowFound){
+			iterations++;
+		}
+	}
+	
 	public void setMaxFlowFound(boolean value){
 		maxFlowFound = value;
 	}

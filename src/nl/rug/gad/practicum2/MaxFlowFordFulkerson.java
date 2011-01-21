@@ -39,6 +39,7 @@ public class MaxFlowFordFulkerson {
 	public void nextFlow(Method m){		
 		//Reset all directions in graph
 		resetGraphStatus();
+		AugmentedPath.getProfiler().incIterations();
 		AugmentedPath.getProfiler().startStopwatch();
 		List<Edge> augmentedPath = getAugmentedPath(m);
 		if(augmentedPath.size() > 0){
