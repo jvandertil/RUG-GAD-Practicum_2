@@ -15,7 +15,7 @@ De pseudocode waar de code op gebaseerd is, is te vinden in algoritme \ref{alg:D
 \REQUIRE Input: Graph g, Start vertex s, End vertex t, HashMap parents with vertexes and its parent edges
 \STATE Label s as $EXPLORED$
 \FORALL{edge $e \in s.incidentEdges$}
-\IF e is not labeled as $UNEXPLORED$ && s.residualCapacity(e) > 0
+\IF e is not labeled as $UNEXPLORED$ $\and$ s.residualCapacity(e) > 0
 \STATE w $\gets $ g.opposite(s, e)
 \IF w is labeled as $UNEXPLORED$
 \STATE label $e$ as $DISCOVERY$ edge
