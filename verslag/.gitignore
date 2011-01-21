@@ -1,5 +1,7 @@
 *.tps
 *.aux
+*.backup
+*.*~
 *.lof
 *.log
 *.lot
